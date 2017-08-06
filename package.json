@@ -1,25 +1,31 @@
 {
-  "name": "educollection",
-  "version": "1.0.0",
-  "description": "Term paper to Postgraduate of Web Applications Development at Pontifical Catholic University of Minas Gerais - Brazil",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "express-4.x-local-example",
+  "version": "0.0.0",
+  "description": "Express 4.x app using Passport for authentication with username and password.",
+  "keywords": [
+    "example",
+    "express",
+    "passport"
+  ],
+  "author": "Jared Hanson",
+  "license": "Unlicense",
+  "homepage": "https://github.com/passport/express-4.x-local-example",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gustavoteodoro/educollection.git"
+    "url": "git://github.com/passport/express-4.x-local-example.git"
   },
-  "author": "Gustavo Teodoro",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gustavoteodoro/educollection/issues"
+    "url": "https://github.com/passport/express-4.x-local-example/issues"
   },
-  "homepage": "https://github.com/gustavoteodoro/educollection#readme",
   "dependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-pug": "^3.3.0",
-    "gulp-sass": "^3.1.0"
+    "body-parser": "^1.13.3",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.3.5",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "morgan": "^1.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
   }
 }
