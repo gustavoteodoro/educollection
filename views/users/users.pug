@@ -1,0 +1,14 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/usuarios") Usuários
+
+h2 Usuários
+ul
+    each user in users
+        li
+            a(href="usuarios/"+user._id)=user.name
+p
+    a(href="/usuarios/novo") Novo usuário

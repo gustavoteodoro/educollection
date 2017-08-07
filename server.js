@@ -1,6 +1,8 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var users = require('./routes/users.js');
+var courses = require('./routes/courses.js');
 var db = require('./db');
 
 
@@ -39,15 +41,12 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
-
-
-
 // Create a new Express application.
 var app = express();
 
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
@@ -63,6 +62,7 @@ app.use(passport.session());
 
 // Define routes.
 app.get('/',
+  require('connect-ensure-login').ensureLoggedIn(),
   function(req, res) {
     res.render('home', { user: req.user });
   });
@@ -89,5 +89,9 @@ app.get('/profile',
   function(req, res){
     res.render('profile', { user: req.user });
   });
+
+app.use('/usuarios', users);
+
+app.use('/cursos', courses);
 
 app.listen(3000);

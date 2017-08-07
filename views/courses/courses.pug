@@ -1,0 +1,14 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/cursos") Usuários
+
+h2 Usuários
+ul
+    each course in courses
+        li
+            a(href="cursos/"+course._id)=course.name
+p
+    a(href="/cursos/novo") Novo curso
