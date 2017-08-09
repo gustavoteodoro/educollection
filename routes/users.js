@@ -22,16 +22,23 @@ userRoute.get('/novo',
 })
 
 userRoute.post('/novo', urlEncodedParser, function(req, res){
-    var user = new UserModel({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        admin: (req.body.admin=='on')
+    UserModel.findOne({ email: req.body.email }, function(err, user) {
+        if(user){
+            res.render('users/userExist', {email: req.body.email});
+        }else {
+            var user = new UserModel({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                admin: (req.body.admin=='on')
+            });
+            user.save(function(error, user){
+                if(error) return console.error(error);
+                res.render('users/newUserCreated', {name: user.name});
+            })
+        }
     });
-    user.save(function(error, user){
-        if(error) return console.error(error);
-        res.render('users/newUserCreated', {name: user.name});
-    })
+    
 })
 
 userRoute.get('/:id',

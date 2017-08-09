@@ -1,10 +1,11 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
 var users = require('./routes/users.js');
 var courses = require('./routes/courses.js');
-var db = require('./db');
-
+mongoose.connect('mongodb://localhost:27017/teste');
+var UserModel = require('./models/userModel');
 
 // Configure the local strategy for use by Passport.
 //
@@ -14,14 +15,13 @@ var db = require('./db');
 // will be set at `req.user` in route handlers after authentication.
 passport.use(new Strategy(
   function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
+    UserModel.findOne({ email: username }, function(err, user) {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
       if (user.password != password) { return cb(null, false); }
       return cb(null, user);
     });
   }));
-
 
 // Configure Passport authenticated session persistence.
 //
@@ -31,11 +31,11 @@ passport.use(new Strategy(
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+  cb(null, user._id);
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
+  UserModel.findOne({ _id: id }, function(err, user) {
     if (err) { return cb(err); }
     cb(null, user);
   });
