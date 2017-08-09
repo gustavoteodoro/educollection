@@ -1,0 +1,67 @@
+body{
+    font-family: 'Helvetica', sans-serif;
+}
+.login{
+    &-bg-video{
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        video{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+        }
+    }
+    &-container{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+        background: rgba(46,46,46,0.47);
+        background: -moz-radial-gradient(center, ellipse cover, rgba(46,46,46,0.47) 0%, rgba(31,31,31,0.73) 100%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(46,46,46,0.47)), color-stop(100%, rgba(31,31,31,0.73)));
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(46,46,46,0.47) 0%, rgba(31,31,31,0.73) 100%);
+        background: -o-radial-gradient(center, ellipse cover, rgba(46,46,46,0.47) 0%, rgba(31,31,31,0.73) 100%);
+        background: -ms-radial-gradient(center, ellipse cover, rgba(46,46,46,0.47) 0%, rgba(31,31,31,0.73) 100%);
+        background: radial-gradient(ellipse at center, rgba(46,46,46,0.47) 0%, rgba(31,31,31,0.73) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e2e2e', endColorstr='#1f1f1f', GradientType=1 );
+        form{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            font-size: 25px;
+            color: #fff;
+            letter-spacing: 2.8px;
+        }
+        label{
+            font-size: 18px;
+            color: #fff;
+        }
+        input{
+            border: none;
+            display: block;
+            background: white;
+            color: black;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            &.submit{
+                width: 100%;
+                text-align: center;
+                border-radius: 0;
+                margin-top: 25px;
+                padding: 20px;
+            }
+        }
+    }
+}

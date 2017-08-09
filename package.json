@@ -17,6 +17,12 @@
   "bugs": {
     "url": "https://github.com/passport/express-4.x-local-example/issues"
   },
+  "scripts": {
+    "server": "nodemon server.js",
+    "build-css": "node-sass --include-path scss _appAssets/style/main.scss public/style/main.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "dev": "concurrently --kill-others \"npm run watch-css\" \"npm run server\""
+  },
   "dependencies": {
     "body-parser": "^1.13.3",
     "connect-ensure-login": "^0.1.1",
@@ -29,5 +35,9 @@
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.3"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "node-sass": "^4.5.3"
   }
 }

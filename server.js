@@ -46,6 +46,7 @@ var app = express();
 
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
+app.use(express.static('public'));
 app.set('view engine', 'pug');
 
 // Use application-level middleware for common functionality, including
@@ -84,7 +85,7 @@ app.get('/logout',
     res.redirect('/');
   });
 
-app.get('/profile',
+app.get('/perfil',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
     res.render('profile', { user: req.user });

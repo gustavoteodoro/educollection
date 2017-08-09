@@ -1,10 +1,18 @@
-form(action='/login', method='post')
-	div
-		label Username:
-		input(type='text', name='username')
-		br
-	div
-		label Password:
-		input(type='password', name='password')
-	div
-		input(type='submit', value='Submit')
+include ./header
+.login-bg-video
+	video(autoplay muted loop)
+		source(src="videos/bg-login/video1.mp4" type="video/mp4")
+		source(src="videos/bg-login/video1.ogg" type="video/ogg")
+		source(src="videos/bg-login/video1.webm" type="video/webm")
+.login-container
+	form(action='/login', method='post')
+		h2 EDUCOLLECTION
+		div
+			label E-mail:
+			input(type='text', name='username')
+			br
+		div
+			label Senha:
+			input(type='password', name='password')
+		div
+			input.submit(type='submit', value='Login')
