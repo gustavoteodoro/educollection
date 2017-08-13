@@ -2,13 +2,42 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var courseSchema = new Schema ({
-    name: String,
-    author: String,
-    description: String,
-    category: String,
-    date: {type: Date, default: Date.now},
-    comments: [{ body: String, date: Date }],
-    votes: Number
+    courseTitle: String,
+    courseAuthor: String,
+    courseDescription: String,
+    courseCategory: String,
+    courseUnits: [{
+        unitTitle: String,
+        videos: [{
+            videoTitle: String,
+            videoOrigin: String,
+            videoCode: String,
+            videoSource: String
+        }],
+        files: [{
+            fileTitle: String,
+            fileSource: String
+        }],
+        test: [{
+            testTitle: String,
+            questions: [{
+                questionStatement: String,
+                answers: [{
+                    answerTitle: String,
+                    answerTrue: Boolean
+                }]
+            }]
+        }]
+    }],
+    courseDate: {type: Date, default: Date.now},
+    courseComments: [{
+        body: String,
+        date: Date }
+    ],
+    courseRating: [{
+        ratingValue: Number,
+        ratingAuthor: String
+    }]
 });
 
 var CourseModel = mongoose.model('Course', courseSchema);

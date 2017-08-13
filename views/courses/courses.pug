@@ -5,10 +5,12 @@ ul
     li
         a(href="/cursos") Usuários
 
-h2 Usuários
+h2 Cursos
 ul
     each course in courses
         li
             a(href="cursos/"+course._id)=course.name
-p
-    a(href="/cursos/novo") Novo curso
+
+if(user.admin)
+    p
+        a(href="/cursos/novo") Novo curso

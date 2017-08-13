@@ -1,4 +1,6 @@
 var express = require('express');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
 var courseRoute = express.Router();
 var bodyParser = require('body-parser');
 
@@ -6,14 +8,19 @@ var CourseModel = require('../models/courseModel');
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
-courseRoute.get('/', function(req, res){
-    CourseModel.find(function(error, courses){
-        if(error) return console.error(error);
-        res.render('courses/courses', {courses: courses});
+courseRoute.get('/',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res){
+        CourseModel.find(function(error, courses){
+            if(error) return console.error(error);
+            res.render('courses/courses', {courses: courses, user: req.user});
     })
 })
 
-courseRoute.get('/novo', function(req, res){
+courseRoute.get('/novo',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res){
+    console.log(req.user);
     res.render('courses/newCourse');
 })
 
