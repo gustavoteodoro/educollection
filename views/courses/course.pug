@@ -8,8 +8,25 @@ ul
 
 h2 Curso
 
-p=course.name
-p=course.author
-p=course.description
-p=course.category
-p=course.date
+p=course.courseTitle
+p=course.courseAuthor
+p=course.courseDescription
+p=course.courseCategory
+p=course.courseDate
+
+h3 Comentários
+if(newComment)
+    span="Novo comentário adicionado!"
+if(course.courseComments)
+    each courseComment in course.courseComments
+        h4=courseComment.commentAuthor
+        span=courseComment.commentDate
+        p=courseComment.commentBody 
+
+form(method="post" action="/cursos/"+course._id)
+    label(for="commentAuthor") Autor
+    input(type="text" name="commentAuthor" value=user.name disabled)
+    br
+    label(for="commentBody") Comentário
+    textarea(name="commentBody")
+    input(type="submit" value="Comentar")

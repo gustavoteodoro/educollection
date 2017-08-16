@@ -9,8 +9,8 @@ ul
 h2 Novo curso
 
 form(method="post" action="/cursos/novo")
-    label(for="name") Nome
-    input(type="text" name="name")
+    label(for="title") Title
+    input(type="text" name="title")
     br
     label(for="author") Autor
     input(type="text" name="author")
@@ -23,4 +23,4 @@ form(method="post" action="/cursos/novo")
         option JavaScript
         option HTML
         option CSS
-    input(type="submit" value="Cadastrar")
+    input(type="submit" value="Adicionar curso")

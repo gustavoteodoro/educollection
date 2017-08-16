@@ -31,9 +31,10 @@ var courseSchema = new Schema ({
     }],
     courseDate: {type: Date, default: Date.now},
     courseComments: [{
-        body: String,
-        date: Date }
-    ],
+        commentAuthor: String,
+        commentBody: String,
+        commentDate: {type: Date, default: Date.now}
+    }],
     courseRating: [{
         ratingValue: Number,
         ratingAuthor: String

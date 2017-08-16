@@ -9,7 +9,7 @@ h2 Cursos
 ul
     each course in courses
         li
-            a(href="cursos/"+course._id)=course.name
+            a(href="cursos/"+course._id)=course.courseTitle
 
 if(user.admin)
     p
