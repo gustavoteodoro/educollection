@@ -7,7 +7,7 @@ var UserModel = require('../models/userModel');
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
 userRoute.get('/',
-    require('connect-ensure-login').ensureLoggedIn(),
+    //require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
         UserModel.find(function(error, users){
             if(error) return console.error(error);
@@ -16,7 +16,7 @@ userRoute.get('/',
 })
 
 userRoute.get('/novo',
-    require('connect-ensure-login').ensureLoggedIn(),
+    //require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
         res.render('users/newUser');
 })
@@ -42,7 +42,7 @@ userRoute.post('/novo', urlEncodedParser, function(req, res){
 })
 
 userRoute.get('/:id',
-    require('connect-ensure-login').ensureLoggedIn(),
+    //require('connect-ensure-login').ensureLoggedIn(),
     function(req,res){
         UserModel.findById(req.params.id, function(error, user){
             if(error) return console.error(error);
