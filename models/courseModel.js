@@ -11,7 +11,6 @@ var courseSchema = new Schema ({
         videos: [{
             videoTitle: String,
             videoOrigin: String,
-            videoCode: String,
             videoSource: String
         }],
         files: [{

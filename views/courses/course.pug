@@ -14,14 +14,57 @@ p=course.courseDescription
 p=course.courseCategory
 p=course.courseDate
 
-h3 Comentários
+if(newUnit)
+    span="Nova unidade adicionada!"
+if(course.courseUnits[0])
+    h3 Unidades (#{course.courseUnits.length})
+    - var unitNumber = 0
+    each courseUnit in course.courseUnits
+        - unitNumber = unitNumber + 1
+        h3 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
+            a(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
+            | 
+            a(href=course._id+"/unidade/"+courseUnit._id+"/addAnexo") Adicionar arquivos
+            | 
+            a(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
+            | 
+            a(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
+        if(courseUnit.videos[0])
+            h4 Vídeos
+            ul
+                each courseVideo in courseUnit.videos
+                    li=courseVideo.videoTitle
+                    iframe(width='560', height='315', src='https://www.youtube.com/embed/'+courseVideo.videoSource+'?rel=0&showinfo=0', frameborder='0', allowfullscreen='')
+        if(courseUnit.files[0])
+            h4 Anexos
+            ul
+                each courseFile in courseUnit.files
+                    li=courseFile.fileTitle
+        if(courseUnit.test[0])
+            h4 Provas
+            ul
+            each courseTest in courseUnit.test
+                li=courseTest.testTitle
+
+form(method="post" action="/cursos/"+course._id+"/criarUnidade")
+    label(for="unitTitle") Título da unidade
+    input(type="text" name="unitTitle")
+    input(type="submit" value="Adicionar nova Unidade")
+
+
 if(newComment)
     span="Novo comentário adicionado!"
-if(course.courseComments)
+if(deletedComment)
+    span="Comentário excluído!"
+if(course.courseComments[0])
+    h3 Comentários (#{course.courseComments.length})
     each courseComment in course.courseComments
         h4=courseComment.commentAuthor
         span=courseComment.commentDate
-        p=courseComment.commentBody 
+        p=courseComment.commentBody
+        a(href=course._id+"/excluirComentario/"+courseComment._id) Excluir
+else
+    h3 Seja o primeiro a comentar
 
 form(method="post" action="/cursos/"+course._id)
     label(for="commentAuthor") Autor

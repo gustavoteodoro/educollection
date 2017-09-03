@@ -1,0 +1,25 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/cursos") Cursos
+    li Curso
+
+h2 Curso #{course.courseTitle}
+h3 Adicionar vídeo na unidade #{unit.unitTitle}
+
+form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addVideo")
+    label(for="videoTitle") Título do vídeo
+    input(type="text" name="videoTitle")
+    br
+    label(for="videoOrigin") Origem do vídeo
+    select(name="videoOrigin")
+        option(value="yt") YouTube
+        option(value="vm") Vimeo
+        option(valuye="sh") Arquivo MP4
+    br
+    label(for="videoSource") ID do vídeo no YouTube
+    input(type="text" name="videoSource")
+    br
+    input(type="submit" value="Adicionar novo vídeo")

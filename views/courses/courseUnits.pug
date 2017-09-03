@@ -1,0 +1,22 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/cursos") Cursos
+    li Unidades do curso
+
+h2 Unidades do curso
+if(newUnit)
+    span="Nova unidade!"
+if(course.courseUnits)
+    each courseUnit in course.courseUnits
+        h2=courseComment.commentAuthor
+        span=courseComment.commentDate
+        p=courseComment.commentBody 
+
+h3 Adicionar nova unidade
+form(method="post" action="/cursos/"+course._id+"/unidades/")
+    label(for="unitTitle") Título da unidade
+    input(type="text" name="unitTitle")
+    input(type="submit" value="Adicionar unidade")
