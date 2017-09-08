@@ -1,0 +1,15 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/cursos") Cursos
+    li Curso
+
+h3 Curso #{course.courseTitle} - Unidade #{unit.unitTitle}
+
+form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addTest")
+    label(for="testTitle") Título da prova
+    input(type="text" name="testTitle")
+    br
+    input(type="submit" value="Próximo passo")

@@ -156,4 +156,70 @@ courseRoute.post('/:id/unidade/:unitId/addVideo', function(req,res){
     })
 })
 
+// Adicionar arquivo
+courseRoute.get('/:id/unidade/:unitId/addFile', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        if(error) return console.error(error);
+        res.render('courses/newFile', {
+            course: course,
+            user: req.user,
+            unit: unit
+        });
+    })
+})
+
+// Adicionar arquivo enviar
+courseRoute.post('/:id/unidade/:unitId/addFile', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        course.courseUnits.id(req.params.unitId).files.push({
+            fileTitle: req.body.fileTitle,
+            fileOrigin: req.body.fileOrigin
+        });
+        var subdoc = course.courseUnits[0];
+        subdoc.isNew; // true
+        course.save(function (err) {
+            if (err) return handleError(err)
+            res.redirect('/cursos/'+course._id);
+        });
+    })
+})
+
+// Adicionar teste
+courseRoute.get('/:id/unidade/:unitId/addTest', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        if(error) return console.error(error);
+        res.render('courses/newTest', {
+            course: course,
+            user: req.user,
+            unit: unit
+        });
+    })
+})
+
+// Adicionar teste enviar
+courseRoute.post('/:id/unidade/:unitId/addTest', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        course.courseUnits.id(req.params.unitId).test.push({
+            testTitle: req.body.testTitle
+        });
+        var subdoc = course.courseUnits[0];
+        subdoc.isNew; // true
+        course.save(function (err) {
+            if (err) return handleError(err)
+            res.render('courses/editTest', {
+                course: course,
+                user: req.user,
+                unit: unit,
+                test: unit.test.pop()
+            });
+        });
+    })
+})
+
 module.exports = courseRoute;
