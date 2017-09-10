@@ -101,11 +101,7 @@ courseRoute.post('/:id/criarUnidade', urlEncodedParser, function(req, res){
         subdoc.isNew; // true
         course.save(function (err) {
             if (err) return handleError(err)
-            res.render('courses/course', {
-                course: course,
-                user: req.user,
-                newUnit: true
-            });
+            res.redirect('/cursos/'+course._id);
         });
     })
 })
@@ -205,6 +201,7 @@ courseRoute.get('/:id/unidade/:unitId/addTest', function(req,res){
 courseRoute.post('/:id/unidade/:unitId/addTest', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
         course.courseUnits.id(req.params.unitId).test.push({
             testTitle: req.body.testTitle
         });
@@ -212,14 +209,81 @@ courseRoute.post('/:id/unidade/:unitId/addTest', function(req,res){
         subdoc.isNew; // true
         course.save(function (err) {
             if (err) return handleError(err)
-            res.render('courses/editTest', {
-                course: course,
-                user: req.user,
-                unit: unit,
-                test: unit.test.pop()
-            });
+            res.redirect('/cursos/'+course._id+'/unidade/'+unit._id+'/editarProva/'+unit.test.pop()._id);
         });
     })
 })
+
+// Ver teste
+courseRoute.get('/:id/unidade/:unitId/prova/:testId', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var test = unit.test.id(req.params.testId);
+        if(error) return console.error(error);
+        res.render('courses/test', {
+            course: course,
+            user: req.user,
+            unit: unit,
+            test: test
+        });
+    })
+})
+
+
+// Editar teste
+courseRoute.get('/:id/unidade/:unitId/editarProva/:testId', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var test = unit.test.id(req.params.testId);
+        if(error) return console.error(error);
+        res.render('courses/editTest', {
+            course: course,
+            user: req.user,
+            unit: unit,
+            test: test
+        });
+    })
+})
+
+// Editar teste - adicionar questão
+courseRoute.post('/:id/unidade/:unitId/editarProva/:testId', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var test = unit.test.id(req.params.testId)
+        test.questions.push({
+            questionStatement: req.body.testTitle,
+            answers: [
+                {
+                    answerTitle: req.body.trueOption,
+                    answerTrue: true
+                },
+                {
+                    answerTitle: req.body.fakeOption1,
+                    answerTrue: false
+                },
+                {
+                    answerTitle: req.body.fakeOption1,
+                    answerTrue: false
+                },
+                {
+                    answerTitle: req.body.fakeOption1,
+                    answerTrue: false
+                }
+            ]
+        });
+        var subdoc = test.questions[0];
+        subdoc.isNew; // true
+        course.save(function (err) {
+            if (err) return handleError(err)
+            res.redirect('/cursos/'+course._id+'/unidade/'+unit._id+'/editarProva/'+unit.test.pop()._id);
+        });
+    })
+})
+
+
+
 
 module.exports = courseRoute;

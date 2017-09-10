@@ -6,10 +6,31 @@ ul
         a(href="/cursos") Cursos
     li Curso
 
+h1 Prova #{test.testTitle}
 h3 Curso #{course.courseTitle} - Unidade #{unit.unitTitle}
 
-form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addTest")
-    label(for="testTitle") Título da prova
+if(test.questions[0])
+    each question in test.questions
+        h4=question.questionStatement
+        each answer in question.answers
+            span=answer.answerTitle
+            if(answer.answerTrue)
+                span Verdadeiro
+
+form(method="post" action='/cursos/'+course._id+'/unidade/'+unit._id+'/editarProva/'+test._id)
+    label(for="testTitle") Enunciado da questão:
     input(type="text" name="testTitle")
     br
-    input(type="submit" value="Próximo passo")
+    label(for="trueOption") Alternativa correta:
+    input(type="text" name="trueOption")
+    br
+    label(for="fakeOption1") Alternativa incorreta 1:
+    input(type="text" name="fakeOption1")
+    br
+    label(for="fakeOption2") Alternativa incorreta 2:
+    input(type="text" name="fakeOption2")
+    br
+    label(for="fakeOption3") Alternativa incorreta 3:
+    input(type="text" name="fakeOption3")
+    br
+    input(type="submit" value="Adicionar questão")

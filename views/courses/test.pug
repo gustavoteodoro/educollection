@@ -1,0 +1,24 @@
+include ../header
+ul
+    li
+        a(href="/") Home
+    li
+        a(href="/cursos") Cursos
+    li Curso
+
+h1 Prova #{test.testTitle}
+h3 Curso #{course.courseTitle} - Unidade #{unit.unitTitle}
+
+form(method="post" action='/cursos/'+course._id+'/unidade/'+unit._id+'/prova/'+test._id)
+if(test.questions[0])
+    - var questionNumber = 0
+    each question in test.questions
+        - questionNumber = questionNumber + 1
+        h4=question.questionStatement
+        each answer in question.answers
+            input(type="radio" value=answer._id id=answer._id name='question'+questionNumber)
+            label(for=answer._id)=answer.answerTitle
+            br
+
+
+    input(type="submit" value="Enviar")
