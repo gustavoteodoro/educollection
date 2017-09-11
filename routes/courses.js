@@ -23,7 +23,9 @@ courseRoute.get('/',
 courseRoute.get('/novo',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
-    res.render('courses/newCourse');
+    res.render('courses/newCourse', {
+        user: req.user
+    });
 })
 
 courseRoute.post('/novo', urlEncodedParser, function(req, res){

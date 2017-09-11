@@ -1,0 +1,60 @@
+.main-header{
+    background: $black-olive;
+    color: $white;
+    clear: both;
+    overflow: hidden;
+    .logo{
+        font-family: 'Bree Serif', sans-serif;
+        margin-left: 20px;
+        color: $white;
+        font-weight: 400;
+        text-decoration: none;
+        float: left;
+        transition: color .3s ease;
+        &:hover{
+            color: $blue-jeans;
+        }
+        h1{
+            font-size: 26px;
+        }
+    }
+    .right-header{
+        margin-top: 10px;
+        float: right;
+    }
+    .main-menu{
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                display: inline-block;
+                margin: 0 10px;
+                text-transform: uppercase;
+                font-size: 14px;
+                &:last-child{
+                    margin-right: 20px;
+                }
+                a{
+                    color: $white;
+                    font-weight: 400;
+                    text-decoration: none;
+                    transition: color .3s ease;
+                    &:hover{
+                        color: $blue-jeans;
+                    }
+                }
+            }
+        }
+    }
+    .welcome{
+        text-align: right;
+        margin-right: 20px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        a{
+            color: $white;
+            font-weight: 400;
+            text-decoration: none;
+        }
+    }
+}

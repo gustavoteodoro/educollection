@@ -1,0 +1,20 @@
+label{
+    font-size: 18px;
+    color: $black-olive;
+}
+input{
+    border: none;
+    display: block;
+    background: white;
+    color: $black-olive;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    &.submit{
+        width: 100%;
+        text-align: center;
+        border-radius: 0;
+        margin-top: 25px;
+        padding: 20px;
+    }
+}

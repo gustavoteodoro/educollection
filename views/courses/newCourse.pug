@@ -1,4 +1,5 @@
-include ../header
+include ../modules/header
+include ../modules/menu
 ul
     li
         a(href="/") Home
@@ -23,4 +24,33 @@ form(method="post" action="/cursos/novo")
         option JavaScript
         option HTML
         option CSS
+    br
+    label Selecione uma capa
+    input(type="radio" value="cover1" id="cover1" name='covers')
+    label(for="cover1")
+        img(src="/images/covers/thumb/cover1.jpg")
+    input(type="radio" value="cover2" id="cover2" name='covers')
+    label(for="cover2")
+        img(src="/images/covers/thumb/cover2.jpg")
+    input(type="radio" value="cover3" id="cover3" name='covers')
+    label(for="cover3")
+        img(src="/images/covers/thumb/cover3.jpg")
+    input(type="radio" value="cover4" id="cover4" name='covers')
+    label(for="cover4")
+        img(src="/images/covers/thumb/cover4.jpg")
+    input(type="radio" value="cover5" id="cover5" name='covers')
+    label(for="cover5")
+        img(src="/images/covers/thumb/cover5.jpg")
+    input(type="radio" value="cover6" id="cover6" name='covers')
+    label(for="cover6")
+        img(src="/images/covers/thumb/cover6.jpg")
+    input(type="radio" value="cover7" id="cover7" name='covers')
+    label(for="cover7")
+        img(src="/images/covers/thumb/cover7.jpg")
+    input(type="radio" value="cover8" id="cover8" name='covers')
+    label(for="cover8")
+        img(src="/images/covers/thumb/cover8.jpg")
+    input(type="radio" value="cover9" id="cover9" name='covers')
+    label(for="cover9")
+        img(src="/images/covers/thumb/cover9.jpg")
     input(type="submit" value="Adicionar curso")

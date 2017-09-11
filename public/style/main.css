@@ -1,19 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans");
 body {
-  font-family: 'Helvetica', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+label {
+  font-size: 18px;
+  color: #383D3B; }
+
+input {
+  border: none;
+  display: block;
+  background: white;
+  color: #383D3B;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px; }
+  input.submit {
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    margin-top: 25px;
+    padding: 20px; }
+
+.main-header {
+  background: #383D3B;
+  color: #fff;
+  clear: both;
+  overflow: hidden; }
+  .main-header .logo {
+    font-family: 'Bree Serif', sans-serif;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: 400;
+    text-decoration: none;
+    float: left;
+    transition: color .3s ease; }
+    .main-header .logo:hover {
+      color: #63ADF2; }
+    .main-header .logo h1 {
+      font-size: 26px; }
+  .main-header .right-header {
+    margin-top: 10px;
+    float: right; }
+  .main-header .main-menu ul {
+    margin: 0;
+    padding: 0; }
+    .main-header .main-menu ul li {
+      display: inline-block;
+      margin: 0 10px;
+      text-transform: uppercase;
+      font-size: 14px; }
+      .main-header .main-menu ul li:last-child {
+        margin-right: 20px; }
+      .main-header .main-menu ul li a {
+        color: #fff;
+        font-weight: 400;
+        text-decoration: none;
+        transition: color .3s ease; }
+        .main-header .main-menu ul li a:hover {
+          color: #63ADF2; }
+  .main-header .welcome {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 14px;
+    margin-bottom: 10px; }
+    .main-header .welcome a {
+      color: #fff;
+      font-weight: 400;
+      text-decoration: none; }
 
 .login-bg-video {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  overflow: hidden; }
-  .login-bg-video video {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%; }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%); }
 
 .login-container {
   position: absolute;
@@ -36,23 +103,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); }
   .login-container h2 {
+    font-family: 'Bree Serif', serif;
     font-size: 25px;
     color: #fff;
     letter-spacing: 2.8px; }
   .login-container label {
-    font-size: 18px;
     color: #fff; }
   .login-container input {
-    border: none;
-    display: block;
-    background: white;
-    color: black;
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 5px; }
-    .login-container input.submit {
-      width: 100%;
-      text-align: center;
-      border-radius: 0;
-      margin-top: 25px;
-      padding: 20px; }
+    color: #fff; }
