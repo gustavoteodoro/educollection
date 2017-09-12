@@ -9,6 +9,7 @@ ul
     li Curso
 
 h2 Curso
+a(href='/cursos/'+course._id+'/excluir') Excluir
 
 p=course.courseTitle
 p=course.courseAuthor
@@ -48,7 +49,8 @@ if(course.courseUnits[0])
             each courseTest in courseUnit.test
                 li
                 a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/prova/'+courseTest._id)
-                    span courseTest.testTitle
+                    span=courseTest.testTitle
+                | 
                 a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id)
                     span Editar
 

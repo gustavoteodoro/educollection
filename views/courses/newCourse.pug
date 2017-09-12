@@ -1,56 +1,58 @@
 include ../modules/header
 include ../modules/menu
-ul
-    li
-        a(href="/") Home
-    li
-        a(href="/cursos") Cursos
-    li Novo Curso
 
-h2 Novo curso
+.centralized-container
+    h2 Novo curso
 
-form(method="post" action="/cursos/novo")
-    label(for="title") Title
-    input(type="text" name="title")
-    br
-    label(for="author") Autor
-    input(type="text" name="author")
-    br
-    label(for="description") Descrição
-    textarea(name="description")
-    br
-    label(for="category") Categoria
-    select(name="category")
-        option JavaScript
-        option HTML
-        option CSS
-    br
-    label Selecione uma capa
-    input(type="radio" value="cover1" id="cover1" name='covers')
-    label(for="cover1")
-        img(src="/images/covers/thumb/cover1.jpg")
-    input(type="radio" value="cover2" id="cover2" name='covers')
-    label(for="cover2")
-        img(src="/images/covers/thumb/cover2.jpg")
-    input(type="radio" value="cover3" id="cover3" name='covers')
-    label(for="cover3")
-        img(src="/images/covers/thumb/cover3.jpg")
-    input(type="radio" value="cover4" id="cover4" name='covers')
-    label(for="cover4")
-        img(src="/images/covers/thumb/cover4.jpg")
-    input(type="radio" value="cover5" id="cover5" name='covers')
-    label(for="cover5")
-        img(src="/images/covers/thumb/cover5.jpg")
-    input(type="radio" value="cover6" id="cover6" name='covers')
-    label(for="cover6")
-        img(src="/images/covers/thumb/cover6.jpg")
-    input(type="radio" value="cover7" id="cover7" name='covers')
-    label(for="cover7")
-        img(src="/images/covers/thumb/cover7.jpg")
-    input(type="radio" value="cover8" id="cover8" name='covers')
-    label(for="cover8")
-        img(src="/images/covers/thumb/cover8.jpg")
-    input(type="radio" value="cover9" id="cover9" name='covers')
-    label(for="cover9")
-        img(src="/images/covers/thumb/cover9.jpg")
-    input(type="submit" value="Adicionar curso")
+    form(method="post" action="/cursos/novo")
+        .newCourse-form
+            label(for="title") Título do curso:
+            input(type="text" placeholder="ex: Treinamento sobre React.js" name="title")
+            br
+            label(for="author") Autor do curso:
+            input(type="text" name="author" placeholder="ex: João da Silva")
+            br
+            label(for="description") Descreva o curso:
+            textarea(name="description" placeholder="Conte um pouco mais sobre o curso em uma frase.")
+            br
+            label(for="category") Selecione uma categoria:
+            select(name="category")
+                option JavaScript
+                option HTML
+                option CSS
+            br
+            label(for="keywords") Palavras-chave (separadas por vírgula):
+            input(type="text" placeholder="ex: React Native, React, JavaScript" name="keywords")
+            br
+        .select-cover
+            .select-cover-title
+                label Selecione uma capa:
+            input.select-cover-item(type="radio" value="cover1" id="cover1" name='covers')
+            label.select-cover-label(for="cover1")
+                img(src="/images/covers/thumb/cover1.jpg")
+            input.select-cover-item(type="radio" value="cover2" id="cover2" name='covers')
+            label.select-cover-label(for="cover2")
+                img(src="/images/covers/thumb/cover2.jpg")
+            input.select-cover-item(type="radio" value="cover3" id="cover3" name='covers')
+            label.select-cover-label(for="cover3")
+                img(src="/images/covers/thumb/cover3.jpg")
+            input.select-cover-item(type="radio" value="cover4" id="cover4" name='covers')
+            label.select-cover-label(for="cover4")
+                img(src="/images/covers/thumb/cover4.jpg")
+            input.select-cover-item(type="radio" value="cover5" id="cover5" name='covers')
+            label.select-cover-label(for="cover5")
+                img(src="/images/covers/thumb/cover5.jpg")
+            input.select-cover-item(type="radio" value="cover6" id="cover6" name='covers')
+            label.select-cover-label(for="cover6")
+                img(src="/images/covers/thumb/cover6.jpg")
+            input.select-cover-item(type="radio" value="cover7" id="cover7" name='covers')
+            label.select-cover-label(for="cover7")
+                img(src="/images/covers/thumb/cover7.jpg")
+            input.select-cover-item(type="radio" value="cover8" id="cover8" name='covers')
+            label.select-cover-label(for="cover8")
+                img(src="/images/covers/thumb/cover8.jpg")
+            input.select-cover-item(type="radio" value="cover9" id="cover9" name='covers')
+            label.select-cover-label(for="cover9")
+                img(src="/images/covers/thumb/cover9.jpg")
+        .newCourse-submit
+            input(type="submit" value="Adicionar curso")

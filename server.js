@@ -45,8 +45,9 @@ app.use(passport.session());
 app.get('/',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res) {
-    res.render('home', { user: req.user });
+    res.redirect('/cursos');
   });
+  
 
 app.get('/login',
   function(req, res){
@@ -71,8 +72,8 @@ app.get('/perfil',
     res.render('profile', { user: req.user });
   });
 
-app.use('/usuarios', users);
-
 app.use('/cursos', courses);
+
+app.use('/usuarios', users);
 
 app.listen(3000);

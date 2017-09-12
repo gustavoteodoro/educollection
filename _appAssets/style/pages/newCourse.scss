@@ -1,0 +1,34 @@
+.newCourse-form{
+    float: left;
+    width: 40%;
+}
+.select-cover{
+    float: right;
+    width: 50%;
+    &-item{
+        display: none;
+        &:checked + .select-cover-label{
+            img{
+                border: 4px solid $blue-jeans;
+            }
+        }
+    }
+    &-label{
+        cursor: pointer;
+        img{
+            width: 150px;
+            border: 4px solid $white;
+            transition: border .3s ease;
+        }
+    }
+    &-title{
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+.newCourse-submit{
+    display: block;
+    float: right;
+    width: 50%;
+    text-align: right;
+}

@@ -2,19 +2,38 @@ label{
     font-size: 18px;
     color: $black-olive;
 }
-input{
+input, textarea{
     border: none;
     display: block;
+    width: 100%;
     background: white;
     color: $black-olive;
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px;
-    border-radius: 5px;
-    &.submit{
+    outline: 0;
+    border-bottom: 1px solid $black-olive;
+    &[type="submit"]{
+        display: inline-block;
         width: 100%;
+        max-width: 300px;
         text-align: center;
         border-radius: 0;
         margin-top: 25px;
         padding: 20px;
+        background: $blue-jeans;
+        border-bottom: none;
+        color: $white;
+        cursor: pointer;
+        transition: all .3s ease;
+        &:hover{
+            background: darken($blue-jeans,10);
+        }
+        &:active{
+            background: darken($blue-jeans,20);
+        }
     }
+}
+select{
+    display: block;
+    margin-top: 10px;
 }

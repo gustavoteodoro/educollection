@@ -18,24 +18,31 @@ userRoute.get('/',
 userRoute.get('/novo',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
-        res.render('users/newUser');
+        res.render('users/newUser', {
+            user: req.user
+        });
 })
 
 userRoute.post('/novo', urlEncodedParser, function(req, res){
+    require('connect-ensure-login').ensureLoggedIn(),
     UserModel.findOne({ email: req.body.email }, function(err, user) {
-        if(user){
-            res.render('users/userExist', {email: req.body.email});
-        }else {
-            var user = new UserModel({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                admin: (req.body.admin=='on')
-            });
-            user.save(function(error, user){
-                if(error) return console.error(error);
-                res.render('users/newUserCreated', {name: user.name});
-            })
+        if(req.user.admin){
+            if(user){
+                res.render('users/userExist', {email: req.body.email});
+            }else {
+                var user = new UserModel({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                    admin: (req.body.admin=='on')
+                });
+                user.save(function(error, user){
+                    if(error) return console.error(error);
+                    res.render('users/newUserCreated', {name: user.name});
+                })
+            }
+        } else {
+            res.redirect('/');
         }
     });
     

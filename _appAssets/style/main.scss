@@ -5,10 +5,13 @@
 @import "base";
 
 // Components
+@import "components/course-thumb";
 @import "components/form";
 
 // Modules
+@import "modules/course-carousel";
 @import "modules/menu";
 
 // Pages
 @import "pages/login";
+@import "pages/newCourse";

@@ -6,6 +6,8 @@ var courseSchema = new Schema ({
     courseAuthor: String,
     courseDescription: String,
     courseCategory: String,
+    courseCover: String,
+    courseKeywords: [],
     courseUnits: [{
         unitTitle: String,
         videos: [{
@@ -31,6 +33,7 @@ var courseSchema = new Schema ({
     courseDate: {type: Date, default: Date.now},
     courseComments: [{
         commentAuthor: String,
+        commentID: String,
         commentBody: String,
         commentDate: {type: Date, default: Date.now}
     }],

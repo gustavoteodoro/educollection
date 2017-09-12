@@ -1,25 +1,20 @@
 include ../modules/header
 include ../modules/menu
-ul
-    li
-        a(href="/") Home
-    li
-        a(href="/usuarios") Usuários
-    li Novo usuário
 
-h2 Novo usário
+.centralized-container
+    h2 Novo usário
 
-form(method="post" action="/usuarios/novo")
-    label(for="name") Nome
-    input(type="text" name="name")
-    br
-    label(for="email") E-mail
-    input(type="email" name="email")
-    br
-    label(for="password") Senha
-    input(type="password" name="password")
-    br
-    label(for="admin") Administrador
-    input(type="checkbox" name="admin")
-    br
-    input(type="submit" value="Cadastrar")
+    form(method="post" action="/usuarios/novo")
+        label(for="name") Nome
+        input(type="text" name="name")
+        br
+        label(for="email") E-mail
+        input(type="email" name="email")
+        br
+        label(for="password") Senha
+        input(type="password" name="password")
+        br
+        label(for="admin") Administrador
+        input(type="checkbox" name="admin")
+        br
+        input(type="submit" value="Cadastrar")

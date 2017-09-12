@@ -11,7 +11,7 @@ var urlEncodedParser = bodyParser.urlencoded({extended: false});
 courseRoute.get('/',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
-        CourseModel.find(function(error, courses){
+        CourseModel.find().sort('-courseDate').exec(function(error, courses){
             if(error) return console.error(error);
             res.render('courses/courses', {
                 courses: courses,
@@ -29,17 +29,21 @@ courseRoute.get('/novo',
 })
 
 courseRoute.post('/novo', urlEncodedParser, function(req, res){
+    var keywords = req.body.keywords.split(", ");
     var course = new CourseModel({
         courseTitle: req.body.title,
         courseAuthor: req.body.author,
         courseDescription: req.body.description,
         courseCategory: req.body.category,
+        courseCover: req.body.covers,
+        courseKeywords: keywords,
         courseDate: req.body.date
     });
     course.save(function(error, course){
         if(error) return console.error(error);
         res.render('courses/newCourseCreated', {
-            title: course.title
+            title: req.body.title,
+            user: req.user
         });
     })
 })
@@ -52,6 +56,20 @@ courseRoute.get('/:id', function(req,res){
             course: course,
             user: req.user
         });
+    })
+})
+
+courseRoute.get('/:id/excluir', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        if(req.user.admin){
+            course.remove({ _id: req.params.id }, function (error) {
+                if(error) return console.error(error);
+                res.redirect('/');
+            });
+        } else {
+            res.redirect('/');
+        }
     })
 })
 
