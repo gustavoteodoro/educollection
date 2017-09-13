@@ -115,6 +115,85 @@ select {
     font-size: 18px;
     margin-left: 20px; }
 
+.course-container {
+  position: relative;
+  width: 100%; }
+  .course-container-content {
+    width: 70%;
+    padding: 20px;
+    box-sizing: border-box; }
+  .course-container-title {
+    font-size: 22px;
+    margin: 0;
+    color: #383D3B;
+    border-bottom: 1px solid #383D3B;
+    padding-bottom: 10px; }
+
+.course-header {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  color: #fff; }
+  .course-header-bg {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; }
+  .course-header-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20; }
+    .course-header-title > h2 {
+      font-size: 32px;
+      margin: 0; }
+  .course-header-description {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 20; }
+    .course-header-description > p {
+      margin: 0; }
+  .course-header-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20; }
+    .course-header-info-date {
+      font-size: 12px;
+      margin-right: 10px; }
+    .course-header-info-category {
+      font-size: 12px;
+      padding: 0px 5px;
+      background: #8783D1; }
+      .category_JavaScript .course-header-info-category {
+        background: #FFFD98;
+        color: #000; }
+      .category_CSS .course-header-info-category {
+        background: #8783D1; }
+      .category_HTML .course-header-info-category {
+        background: #DB2763; }
+  .course-header-button {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 20; }
+    .course-header-button > a {
+      font-size: 18px;
+      color: #fff;
+      background: #63ADF2;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background .3s ease; }
+      .course-header-button > a:hover {
+        background: #3494ee; }
+      .course-header-button > a:active {
+        background: #127bdd; }
+
 .main-header {
   background: #383D3B;
   color: #fff;

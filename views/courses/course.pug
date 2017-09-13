@@ -1,83 +1,87 @@
 include ../modules/header
 include ../modules/menu
 
-ul
-    li
-        a(href="/") Home
-    li
-        a(href="/cursos") Cursos
-    li Curso
+div(class="course-header category_"+course.courseCategory)
+    .course-thumb-mask-shadow
+    .course-thumb-mask
+    img.course-header-bg(src="/images/covers/hd/"+course.courseCover+".jpg")
+    .course-header-title
+        h2=course.courseTitle
+        span por #{course.courseAuthor}
+    
+    .course-header-description
+        p=course.courseDescription
 
-h2 Curso
-a(href='/cursos/'+course._id+'/excluir') Excluir
+    .course-header-info    
+        span.course-header-info-date Publicado em #{courseDateFormated}
+        span.course-header-info-category=course.courseCategory
+    .course-header-button
+        a(href='/cursos/'+course._id+'/excluir') Continuar curso
 
-p=course.courseTitle
-p=course.courseAuthor
-p=course.courseDescription
-p=course.courseCategory
-p=course.courseDate
+.course-container
+    .course-container-content
+        h3.course-container-title Unidades (#{course.courseUnits.length})
+        if(!course.courseUnits[0])
+            p Não há unidades cadastradas.
+        if(course.courseUnits[0])
+            h3 Unidades (#{course.courseUnits.length})
+            - var unitNumber = 0
+            each courseUnit in course.courseUnits
+                - unitNumber = unitNumber + 1
+                h3 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
+                    a(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
+                    | 
+                    a(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
+                    | 
+                    a(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
+                    | 
+                    a(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
+                if(courseUnit.videos[0])
+                    h4 Vídeos
+                    ul
+                        each courseVideo in courseUnit.videos
+                            li=courseVideo.videoTitle
+                            iframe(width='560', height='315', src='https://www.youtube.com/embed/'+courseVideo.videoSource+'?rel=0&showinfo=0', frameborder='0', allowfullscreen='')
+                if(courseUnit.files[0])
+                    h4 Anexos
+                    ul
+                        each courseFile in courseUnit.files
+                            li=courseFile.fileTitle
+                if(courseUnit.test[0])
+                    h4 Provas
+                    ul
+                    each courseTest in courseUnit.test
+                        li
+                        a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/prova/'+courseTest._id)
+                            span=courseTest.testTitle
+                        | 
+                        a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id)
+                            span Editar
 
-if(newUnit)
-    span="Nova unidade adicionada!"
-if(course.courseUnits[0])
-    h3 Unidades (#{course.courseUnits.length})
-    - var unitNumber = 0
-    each courseUnit in course.courseUnits
-        - unitNumber = unitNumber + 1
-        h3 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
-            a(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
-            | 
-            a(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
-            | 
-            a(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
-            | 
-            a(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
-        if(courseUnit.videos[0])
-            h4 Vídeos
-            ul
-                each courseVideo in courseUnit.videos
-                    li=courseVideo.videoTitle
-                    iframe(width='560', height='315', src='https://www.youtube.com/embed/'+courseVideo.videoSource+'?rel=0&showinfo=0', frameborder='0', allowfullscreen='')
-        if(courseUnit.files[0])
-            h4 Anexos
-            ul
-                each courseFile in courseUnit.files
-                    li=courseFile.fileTitle
-        if(courseUnit.test[0])
-            h4 Provas
-            ul
-            each courseTest in courseUnit.test
-                li
-                a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/prova/'+courseTest._id)
-                    span=courseTest.testTitle
-                | 
-                a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id)
-                    span Editar
-
-form(method="post" action="/cursos/"+course._id+"/criarUnidade")
-    label(for="unitTitle") Título da unidade
-    input(type="text" name="unitTitle")
-    input(type="submit" value="Adicionar nova Unidade")
+        form(method="post" action="/cursos/"+course._id+"/criarUnidade")
+            label(for="unitTitle") Título da unidade
+            input(type="text" name="unitTitle")
+            input(type="submit" value="Adicionar nova Unidade")
 
 
-if(newComment)
-    span="Novo comentário adicionado!"
-if(deletedComment)
-    span="Comentário excluído!"
-if(course.courseComments[0])
-    h3 Comentários (#{course.courseComments.length})
-    each courseComment in course.courseComments
-        h4=courseComment.commentAuthor
-        span=courseComment.commentDate
-        p=courseComment.commentBody
-        a(href=course._id+"/excluirComentario/"+courseComment._id) Excluir
-else
-    h3 Seja o primeiro a comentar
+        if(newComment)
+            span="Novo comentário adicionado!"
+        if(deletedComment)
+            span="Comentário excluído!"
+        if(course.courseComments[0])
+            h3 Comentários (#{course.courseComments.length})
+            each courseComment in course.courseComments
+                h4=courseComment.commentAuthor
+                span=courseComment.commentDate
+                p=courseComment.commentBody
+                a(href=course._id+"/excluirComentario/"+courseComment._id) Excluir
+        else
+            h3 Seja o primeiro a comentar
 
-form(method="post" action="/cursos/"+course._id)
-    label(for="commentAuthor") Autor
-    input(type="text" name="commentAuthor" value=user.name disabled)
-    br
-    label(for="commentBody") Comentário
-    textarea(name="commentBody")
-    input(type="submit" value="Comentar")
+        form(method="post" action="/cursos/"+course._id)
+            label(for="commentAuthor") Autor
+            input(type="text" name="commentAuthor" value=user.name disabled)
+            br
+            label(for="commentBody") Comentário
+            textarea(name="commentBody")
+            input(type="submit" value="Comentar")

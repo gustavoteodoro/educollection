@@ -1,0 +1,16 @@
+.course-container{
+    position: relative;
+    width: 100%;
+    &-content{
+        width: 70%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    &-title{
+        font-size: 22px;
+        margin: 0;
+        color: $black-olive;
+        border-bottom: 1px solid $black-olive;
+        padding-bottom: 10px;
+    }
+}

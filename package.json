@@ -30,6 +30,7 @@
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.5",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",

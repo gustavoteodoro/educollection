@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var moment = require('moment');
 var courseRoute = express.Router();
 var bodyParser = require('body-parser');
 
@@ -54,6 +55,7 @@ courseRoute.get('/:id', function(req,res){
         if(error) return console.error(error);
         res.render('courses/course', {
             course: course,
+            courseDateFormated: moment(course.courseDate).format('L'),
             user: req.user
         });
     })
