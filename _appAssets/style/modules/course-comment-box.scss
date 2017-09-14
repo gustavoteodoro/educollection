@@ -1,0 +1,18 @@
+.course-comment-box{
+    padding: 20px;
+    position: relative;
+    h4{
+        margin: 0;
+    }
+    &:nth-child(odd){
+        background: lighten($black, 95);
+    }
+    .course-rating{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    &-write{
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,24 @@
+.classroom{
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    clear: both;
+    &-main-video{
+        width: 100%;
+        height: calc(100vh - 69.813px);
+        position: relative;
+    }
+    &-video{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 70px);
+    }
+    &-video-title{
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+    }
+}

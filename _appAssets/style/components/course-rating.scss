@@ -1,0 +1,46 @@
+.course-rating{
+    input{
+        display: none;
+        &:checked + label{
+            svg{
+                path{
+                    fill: $ube;
+                }
+            }
+            & ~ label{
+                svg{
+                    path{
+                        fill: $light-blue;
+                    }
+                } 
+            }
+        }
+    }
+    &.-active{
+        label{
+            cursor: pointer;
+            &:hover{
+                svg{
+                    path{
+                        fill: $ube;
+                    }
+                }
+                & ~ label{
+                    svg{
+                        path{
+                            fill: $light-blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    svg{
+        width: 25px;
+        height: 25px;
+        path{
+            fill: $ube;
+            transition: fill .3s ease;
+        }
+    }
+}

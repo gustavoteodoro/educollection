@@ -1,17 +1,12 @@
 include ../modules/header
 include ../modules/menu
-ul
-    li
-        a(href="/") Home
-    li
-        a(href="/cursos") Cursos
-    li Curso
 
-h2 Curso #{course.courseTitle}
-h3 Adicionar uma prova na unidade #{unit.unitTitle}
+.centralized-container
+    h2 Curso #{course.courseTitle}
+    h3 Adicionar uma prova na unidade #{unit.unitTitle}
 
-form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addTest")
-    label(for="testTitle") Título da prova
-    input(type="text" name="testTitle")
-    br
-    input(type="submit" value="Próximo passo")
+    form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addTest")
+        label(for="testTitle") Título da prova
+        input(type="text" name="testTitle")
+        br
+        input(type="submit" value="Próximo passo")

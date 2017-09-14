@@ -16,32 +16,35 @@ div(class="course-header category_"+course.courseCategory)
         span.course-header-info-date Publicado em #{courseDateFormated}
         span.course-header-info-category=course.courseCategory
     .course-header-button
-        a(href='/cursos/'+course._id+'/excluir') Continuar curso
+        if(course.courseUnits[0].videos[0])
+            a(href='/cursos/'+course._id+'/sala-de-aula/'+course.courseUnits[0]._id+'/video/'+course.courseUnits[0].videos[0]._id) Iniciar curso
+        else
+            if(course.courseUnits[0].test[0])
+                a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
+        a(href='/cursos/'+course._id+'/editar') Editar curso
 
 .course-container
-    .course-container-content
+    main.course-container-content
         h3.course-container-title Unidades (#{course.courseUnits.length})
+            a.course-container-title-admin.addUnit(href="#") Adicionar nova unidade
         if(!course.courseUnits[0])
             p Não há unidades cadastradas.
+        - var unitNumber = 0
         if(course.courseUnits[0])
-            h3 Unidades (#{course.courseUnits.length})
-            - var unitNumber = 0
             each courseUnit in course.courseUnits
                 - unitNumber = unitNumber + 1
-                h3 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
-                    a(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
+                h4 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
+                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
                     | 
-                    a(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
+                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
                     | 
-                    a(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
+                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
                     | 
-                    a(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
+                    a.course-container-title-admin(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
                 if(courseUnit.videos[0])
-                    h4 Vídeos
                     ul
                         each courseVideo in courseUnit.videos
                             li=courseVideo.videoTitle
-                            iframe(width='560', height='315', src='https://www.youtube.com/embed/'+courseVideo.videoSource+'?rel=0&showinfo=0', frameborder='0', allowfullscreen='')
                 if(courseUnit.files[0])
                     h4 Anexos
                     ul
@@ -57,31 +60,76 @@ div(class="course-header category_"+course.courseCategory)
                         | 
                         a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id)
                             span Editar
-
-        form(method="post" action="/cursos/"+course._id+"/criarUnidade")
-            label(for="unitTitle") Título da unidade
-            input(type="text" name="unitTitle")
-            input(type="submit" value="Adicionar nova Unidade")
-
-
-        if(newComment)
-            span="Novo comentário adicionado!"
-        if(deletedComment)
-            span="Comentário excluído!"
+        
+        .course-container-unit-form.addUnitForm
+            form(method="post" action="/cursos/"+course._id+"/criarUnidade")
+                h4 Adicionar nova unidade
+                label(for="unitTitle") Título da unidade #{unitNumber+1}
+                input(type="text" name="unitTitle")
+                input(type="submit" value="Adicionar nova Unidade")
+        - var userCommented = false
         if(course.courseComments[0])
-            h3 Comentários (#{course.courseComments.length})
+            h3.course-container-title Avaliações (#{course.courseComments.length})
             each courseComment in course.courseComments
-                h4=courseComment.commentAuthor
-                span=courseComment.commentDate
-                p=courseComment.commentBody
-                a(href=course._id+"/excluirComentario/"+courseComment._id) Excluir
+                if(user._id == courseComment.commentID)
+                    - userCommented = true
+                .course-comment-box
+                    h4=courseComment.commentAuthor
+                    .course-rating
+                        -var commentRatingValues = [1,2,3,4,5]
+                        each commentRatingValue in commentRatingValues
+                            if(commentRatingValue == courseComment.commentRating)
+                                input(type="radio" value=commentRatingValue name="courseRating" disabled checked)
+                            else
+                                input(type="radio" value=commentRatingValue name="courseRating" disabled)
+                            label
+                                svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                    path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                    p=courseComment.commentBody
+                    a(href=course._id+"/excluirComentario/"+courseComment._id) Excluir
         else
-            h3 Seja o primeiro a comentar
+            h3.course-container-title Nenhuma avaliação
+        
+        if(!userCommented)
+            .course-comment-box-write
+                h3.course-container-title Avalie o curso:
+                form(method="post" action="/cursos/"+course._id)
+                    label(for="commentRating") Selecione uma nota:
+                    .course-rating.-active
+                        input(type="radio" id="courseRatingValue1" value="1" name="courseRating")
+                        label(for="courseRatingValue1")
+                            svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                        input(type="radio" id="courseRatingValue2" value="2" name="courseRating")
+                        label(for="courseRatingValue2")
+                            svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                        input(type="radio" id="courseRatingValue3" value="3" name="courseRating")
+                        label(for="courseRatingValue3")
+                            svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                        input(type="radio" id="courseRatingValue4" value="4" name="courseRating")
+                        label(for="courseRatingValue4")
+                            svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                        input(type="radio" id="courseRatingValue5" value="5" name="courseRating")
+                        label(for="courseRatingValue5")
+                            svg(height='20px', style='enable-background:new 0 0 512 512;', version='1.1', viewbox='0 0 512 512', width='20px', xml:space='preserve', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                                path(d='M480,207H308.6L256,47.9L203.4,207H32l140.2,97.9L117.6,464L256,365.4L394.4,464l-54.7-159.1L480,207z')
+                    br
+                    label(for="commentBody") Comentário:
+                    textarea(name="commentBody")
+                    input(type="submit" value="Comentar")
 
-        form(method="post" action="/cursos/"+course._id)
-            label(for="commentAuthor") Autor
-            input(type="text" name="commentAuthor" value=user.name disabled)
-            br
-            label(for="commentBody") Comentário
-            textarea(name="commentBody")
-            input(type="submit" value="Comentar")
+    aside.course-container-sidebar
+        h3.course-container-title Cursos relacionados
+        each courseItem in courses
+            if(String(courseItem._id) !=  String(course._id))
+                if(courseItem.courseCategory === course.courseCategory)
+                    li(class="course-thumb category_"+courseItem.courseCategory)
+                        a(href="cursos/"+courseItem._id)
+                            .course-thumb-mask-shadow
+                            .course-thumb-mask
+                            img(src="/images/covers/thumb/"+courseItem.courseCover+".jpg")
+                            h3.course-thumb-title=courseItem.courseTitle
+                                span.course-thumb-author=courseItem.courseAuthor

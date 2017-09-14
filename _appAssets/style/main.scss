@@ -5,15 +5,21 @@
 @import "base";
 
 // Components
+@import "components/course-rating";
 @import "components/course-thumb";
 @import "components/form";
 
 // Modules
+@import "modules/classroom-main";
+@import "modules/classroom-sidebar";
 @import "modules/course-carousel";
+@import "modules/course-comment-box";
 @import "modules/course-container";
 @import "modules/course-header";
 @import "modules/menu";
+@import "modules/test-container";
 
 // Pages
+@import "pages/classroom";
 @import "pages/login";
 @import "pages/newCourse";

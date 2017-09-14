@@ -1,0 +1,50 @@
+.classroom-sidebar{
+    width: 30%;
+    height: calc(100vh - 69.813px);
+    overflow: auto;
+    display: block;
+    float: left;
+    background: $black-coral;
+    color: $white;
+    &-title{
+        color: $white;
+        font-size: 20px;
+        text-decoration: none;
+        h2{
+            margin: 20px;
+        }
+        span{
+            font-size: 14px;
+            display: block;
+        }
+    }
+    &-unit-title{
+        font-size: 14px;
+        padding: 10px 20px;
+        margin: 0;
+        background: darken($black-coral,10);
+    }
+    &-unit-subtitle{
+        font-size: 12px;
+        padding: 10px 20px;
+        margin: 0;
+        background: darken($black-coral,5);
+    }
+    &-unit-itens{
+        display: block;
+        margin: 0;
+        padding: 0;
+        li{
+            display: block;
+            a{
+                color: $white;
+                display: block;
+                font-size: 12px;
+                text-decoration: none;
+                padding: 10px 20px 10px 40px;
+                margin: 0;
+                border-bottom: 1px solid darken($black-coral,5);
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+include ../modules/header
+include ../modules/menu
+
+.centralized-container
+    h2 Novo curso
+
+    form(method="post" action="/cursos/novo")
+        .newCourse-form
+            label(for="title") Título do curso:
+            input(type="text" value=course.courseTitle name="title")
+            br
+            label(for="author") Autor do curso:
+            input(type="text" name="author" value=course.courseAuthor)
+            br
+            label(for="description") Descreva o curso:
+            textarea(name="description")=course.courseDescription
+            br
+            label(for="category") Selecione uma categoria:
+            - var categories = ['JavaScript','HTML','CSS']
+            select(name="category" value=course.courseCategory)
+                each category in categories
+                    - var checkCategory = (course.courseCategory == category)
+                    option(checkCategory ? 'selected')=category
+            br
+            label(for="keywords") Palavras-chave (separadas por vírgula):
+            - var courseKeywords = '';
+            each courseKeyword in course.courseKeywords
+                - courseKeywords = courseKeywords + courseKeyword + ', ';
+            input(type="text" value=courseKeywords name="keywords")
+            br
+        .select-cover
+            .select-cover-title
+                label Selecione uma capa:
+            - var covers = ["cover1","cover2","cover3","cover4","cover5","cover6","cover7","cover8","cover9"]
+            each cover in covers
+                if(cover == course.courseCover)
+                    input.select-cover-item(type="radio" value=cover id=cover name='covers' checked)
+                else
+                    input.select-cover-item(type="radio" value=cover id=cover name='covers')
+                label.select-cover-label(for=cover)
+                    img(src="/images/covers/thumb/"+cover+".jpg")
+        .newCourse-submit
+            input(type="submit" value="Adicionar curso")

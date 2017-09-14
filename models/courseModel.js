@@ -34,12 +34,8 @@ var courseSchema = new Schema ({
     courseComments: [{
         commentAuthor: String,
         commentID: String,
-        commentBody: String,
-        commentDate: {type: Date, default: Date.now}
-    }],
-    courseRating: [{
-        ratingValue: Number,
-        ratingAuthor: String
+        commentRating: Number,
+        commentBody: String
     }]
 });
 
