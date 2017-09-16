@@ -75,17 +75,21 @@ courseRoute.get('/:id/sala-de-aula/:unitId/video/:videoId', function(req,res){
     CourseModel.findById(req.params.id, function(error, course){
         UserModel.findById(req.user.id, function(error, user){
             if(user.courses[0]){
+                var courseFounded = false;
                 user.courses.map(function (userCourse){
                     if(userCourse.courseId == course._id){
+                        courseFounded = true;
+                        var unitFounded = false;
                         userCourse.courseUnits.map(function (userCourseUnit){
                             if(userCourseUnit.unitId == req.params.unitId){
-                                var founded = false;
+                                unitFounded = true;
+                                var videoFounded = false;
                                 userCourseUnit.videos.map(function (userVideo){
                                     if(userVideo.videoId == req.params.videoId){
-                                        founded = true;
+                                        videoFounded = true;
                                     }
                                 })
-                                if(!founded){
+                                if(!videoFounded){
                                     userCourseUnit.videos.push({
                                         videoId: req.params.videoId
                                     })
@@ -95,37 +99,39 @@ courseRoute.get('/:id/sala-de-aula/:unitId/video/:videoId', function(req,res){
                                         console.log(err);
                                     })
                                 }
-                            } else {
-                                userCourse.courseUnits.push({
-                                    unitId: req.params.unitId,
-                                    videos: [{
-                                        videoId: req.params.videoId
-                                    }]
-                                })
-                                var subdoc = userCourse.courseUnits[0];
-                                subdoc.isNew; // true
-                                user.save(function (err){
-                                    console.log(err);
-                                })
                             }
                         })
-                    } else{
-                        user.courses.push({
-                            courseId: course._id,
-                            courseUnits: [{
+                        if(!unitFounded){
+                            userCourse.courseUnits.push({
                                 unitId: req.params.unitId,
                                 videos: [{
                                     videoId: req.params.videoId
                                 }]
-                            }]
-                        });
-                        var subdoc = user.courses[0];
-                        subdoc.isNew; // true
-                        user.save(function (err) {
-                            console.log(err);
-                        });
+                            })
+                            var subdoc = userCourse.courseUnits[0];
+                            subdoc.isNew; // true
+                            user.save(function (err){
+                                console.log(err);
+                            })
+                        }
                     }
                 })
+                if(!courseFounded){
+                    user.courses.push({
+                        courseId: course._id,
+                        courseUnits: [{
+                            unitId: req.params.unitId,
+                            videos: [{
+                                videoId: req.params.videoId
+                            }]
+                        }]
+                    });
+                    var subdoc = user.courses[0];
+                    subdoc.isNew; // true
+                    user.save(function (err) {
+                        console.log(err);
+                    });
+                }
             } else {
                 user.courses.push({
                     courseId: course._id,
@@ -168,6 +174,137 @@ courseRoute.get('/:id/sala-de-aula/:unitId/test/:testId', function(req,res){
             test: test,
             user: req.user
         });
+    })
+})
+
+courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        UserModel.findById(req.user.id, function(error, user){
+            var unit = course.courseUnits.id(req.params.unitId);
+            var test = unit.test.id(req.params.testId);
+            var questionNumber = 0;
+            var answerCorrect = 0;
+            Object.keys(req.body).forEach(function(key) {
+                test.questions[questionNumber].answers.map((answer)=>{
+                    if(req.body[key] == answer._id){
+                        if(answer.answerTrue){
+                            console.log('acertou');
+                            answerCorrect = answerCorrect + 1;
+                        }   
+                    }
+                })
+                questionNumber = questionNumber + 1;
+            });
+            if(user.courses[0]){
+                var courseFounded = false;
+                user.courses.map(function (userCourse){
+                    if(userCourse.courseId == course._id){
+                        courseFounded = true;
+                        var unitFounded = false;
+                        userCourse.courseUnits.map(function (userCourseUnit){
+                            if(userCourseUnit.unitId == req.params.unitId){
+                                unitFounded = true;
+                                var testFounded = false;
+                                userCourseUnit.test.map(function (userTest){
+                                    var currentScore;
+                                    var currentMaxScore;
+                                    if(userTest.testId == req.params.testId){
+                                        testFounded = true;
+                                        currentScore = userTest.testScore;
+                                        currentMaxScore = userTest.testMaxScore;
+                                        if(((currentMaxScore/currentScore)*100) > ((questionNumber/answerCorrect)*100)){
+                                            console.log('maior');
+                                            userCourseUnit.test.id(userTest._id).remove();
+                                            userCourseUnit.test.push({
+                                                testId: test._id,
+                                                testScore: answerCorrect,
+                                                testMaxScore: questionNumber
+                                            });
+                                            user.save(function (err){
+                                                console.log(err);
+                                            })
+                                        } else {
+                                            console.log('menor');
+                                        }
+                                    }
+                                })
+                                if(!testFounded){
+                                    userCourseUnit.test.push({
+                                        testId: req.params.testId,
+                                        testScore: answerCorrect,
+                                        testMaxScore: questionNumber
+                                    })
+                                    var subdoc = userCourseUnit.videos[0];
+                                    subdoc.isNew; // true
+                                    user.save(function (err){
+                                        console.log(err);
+                                    })
+                                }
+                            }
+                        })
+                        if(!unitFounded){
+                            userCourse.courseUnits.push({
+                                unitId: req.params.unitId,
+                                test: [{
+                                    testId: req.params.testId,
+                                    testScore: answerCorrect,
+                                    testMaxScore: questionNumber
+                                }]
+                            })
+                            var subdoc = userCourse.courseUnits[0];
+                            subdoc.isNew; // true
+                            user.save(function (err){
+                                console.log(err);
+                            })
+                        }
+                    }
+                })
+                if(!courseFounded){
+                    user.courses.push({
+                        courseId: course._id,
+                        courseUnits: [{
+                            unitId: req.params.unitId,
+                            test: [{
+                                testId: req.params.testId,
+                                testScore: answerCorrect,
+                                testMaxScore: questionNumber
+                            }]
+                        }]
+                    });
+                    var subdoc = user.courses[0];
+                    subdoc.isNew; // true
+                    user.save(function (err) {
+                        console.log(err);
+                    });
+                }
+            } else {
+                user.courses.push({
+                    courseId: course._id,
+                    courseUnits: [{
+                        unitId: req.params.unitId,
+                        test: [{
+                            testId: req.params.testId,
+                            testScore: answerCorrect,
+                            testMaxScore: questionNumber
+                        }]
+                    }]
+                });
+                var subdoc = user.courses[0];
+                subdoc.isNew; // true
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                });
+            }
+            if(error) return console.error(error);
+            res.render('courses/classroom', {
+                course: course,
+                unit: unit,
+                test: test,
+                user: req.user,
+                answerCorrect: answerCorrect
+            });
+        })
     })
 })
 
@@ -413,11 +550,11 @@ courseRoute.post('/:id/unidade/:unitId/editarProva/:testId', function(req,res){
                     answerTrue: false
                 },
                 {
-                    answerTitle: req.body.fakeOption1,
+                    answerTitle: req.body.fakeOption2,
                     answerTrue: false
                 },
                 {
-                    answerTitle: req.body.fakeOption1,
+                    answerTitle: req.body.fakeOption3,
                     answerTrue: false
                 }
             ]

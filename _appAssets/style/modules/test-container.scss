@@ -1,6 +1,10 @@
 .test{
     &-container{
-        margin: 20px;
+        padding: 20px;
+        padding-top: 0;
+        box-sizing: border-box;
+        height: calc(100vh - 70px);
+        overflow: auto;
     }
     &-answer{
         display: inline-block;

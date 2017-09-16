@@ -15,7 +15,8 @@ var userSchema = new Schema ({
             }],
             test: [{
                 testId: String,
-                testScore: Number
+                testScore: Number,
+                testMaxScore : Number
             }]
         }]
     }]

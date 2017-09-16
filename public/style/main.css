@@ -376,7 +376,11 @@ select {
       text-decoration: none; }
 
 .test-container {
-  margin: 20px; }
+  padding: 20px;
+  padding-top: 0;
+  box-sizing: border-box;
+  height: calc(100vh - 70px);
+  overflow: auto; }
 
 .test-answer {
   display: inline-block;
@@ -471,3 +475,26 @@ select {
   float: right;
   width: 50%;
   text-align: right; }
+
+.user-courses {
+  overflow: hidden;
+  clear: both; }
+
+.user-course {
+  float: left; }
+  .user-course-content {
+    margin: 0 5px 0 20px;
+    padding-bottom: 20px;
+    background: #EEE5E9; }
+    .user-course-content h4 {
+      padding-top: 10px;
+      text-align: center;
+      margin: 0;
+      font-weight: 400;
+      font-size: 16px; }
+    .user-course-content p {
+      display: block;
+      text-align: center;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600; }
