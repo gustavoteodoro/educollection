@@ -7,6 +7,8 @@ var CourseModel = require('../models/courseModel');
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
+var phantom = require('phantom');
+
 userRoute.get('/',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
@@ -79,5 +81,23 @@ userRoute.get('/:id',
         })
     })
 })
+
+userRoute.get('/:id/certificado/:courseId',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req,res){
+        UserModel.findById(req.params.id, function(error, user){
+            CourseModel.findById(req.params.courseId, function(error, course){
+                if(error) return console.error(error);
+                res.render('users/certificate', {
+                    user: user,
+                    course: course
+                });
+            })
+        })
+    }
+)
+
+
+
 
 module.exports = userRoute;

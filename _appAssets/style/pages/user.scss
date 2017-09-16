@@ -23,6 +23,21 @@
                 font-size: 18px;
                 font-weight: 600;
             }
+            a{
+                padding: 5px 10px;
+                background: $ube;
+                color: $white;
+                text-decoration: none;
+                display: block;
+                margin: 0 auto;
+                margin-top: 20px;
+                width: 140px;
+                text-align: center;
+                transition: all .3s ease;
+                &:hover{
+                    background: darken($ube, 10);
+                }
+            }
         }
     }
 }

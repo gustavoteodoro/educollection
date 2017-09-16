@@ -387,6 +387,15 @@ select {
   width: auto;
   margin: 10px; }
 
+.certificate {
+  text-align: center; }
+  .certificate h1 {
+    font-family: 'Bree Serif', sans-serif;
+    font-size: 80px;
+    margin: 40px 0; }
+  .certificate p {
+    font-size: 40px; }
+
 .classroom {
   width: 100%;
   overflow: hidden;
@@ -498,3 +507,16 @@ select {
       margin: 0;
       font-size: 18px;
       font-weight: 600; }
+    .user-course-content a {
+      padding: 5px 10px;
+      background: #8783D1;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 140px;
+      text-align: center;
+      transition: all .3s ease; }
+      .user-course-content a:hover {
+        background: #635ec3; }

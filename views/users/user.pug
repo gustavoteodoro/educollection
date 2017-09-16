@@ -51,5 +51,8 @@ include ../modules/menu
                                         - totalVideo = Math.round(totalVideo)
                                         h4 Progresso do curso:
                                         p #{totalVideo}%
+                                        if(totalScore > 70 && totalVideo == 100)
+                                            a(href=user._id+"/certificado/"+course._id) Emitir certificado
+
             else
                 p Esse usuário ainda não possui cursos em progresso.
