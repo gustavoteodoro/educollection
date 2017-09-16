@@ -1,4 +1,7 @@
 .test{
+    &-container{
+        margin: 20px;
+    }
     &-answer{
         display: inline-block;
         width: auto;

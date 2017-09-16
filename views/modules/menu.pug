@@ -4,7 +4,7 @@ header.main-header
     .right-header
         .welcome
             span Bem-vindx, 
-                a(href="/perfil") #{user.name}
+                a(href="/usuarios/"+user._id) #{user.name}
         nav.main-menu
             ul
                 if(user.admin)
@@ -12,9 +12,11 @@ header.main-header
                         a(href="/cursos/novo") Novo curso
                     li
                         a(href="/usuarios/novo") Novo usuário
+                    li
+                        a(href="/usuarios") Usuários
                 li
                     a(href="/meus-cursos") Meus cursos
                 li
-                    a(href="/perfil") Meu perfil
+                    a(href="/usuarios/"+user._id) Meu perfil
                 li
                     a(href="/logout") Sair

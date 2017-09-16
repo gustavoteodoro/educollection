@@ -16,11 +16,12 @@ div(class="course-header category_"+course.courseCategory)
         span.course-header-info-date Publicado em #{courseDateFormated}
         span.course-header-info-category=course.courseCategory
     .course-header-button
-        if(course.courseUnits[0].videos[0])
-            a(href='/cursos/'+course._id+'/sala-de-aula/'+course.courseUnits[0]._id+'/video/'+course.courseUnits[0].videos[0]._id) Iniciar curso
-        else
-            if(course.courseUnits[0].test[0])
-                a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
+        if(course.courseUnits[0])
+            if(course.courseUnits[0].videos[0])
+                a(href='/cursos/'+course._id+'/sala-de-aula/'+course.courseUnits[0]._id+'/video/'+course.courseUnits[0].videos[0]._id) Iniciar curso
+            else
+                if(course.courseUnits[0].test[0])
+                    a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
         a(href='/cursos/'+course._id+'/editar') Editar curso
 
 .course-container
@@ -42,6 +43,7 @@ div(class="course-header category_"+course.courseCategory)
                     | 
                     a.course-container-title-admin(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
                 if(courseUnit.videos[0])
+                    h4 Vídeos
                     ul
                         each courseVideo in courseUnit.videos
                             li=courseVideo.videoTitle
@@ -53,13 +55,9 @@ div(class="course-header category_"+course.courseCategory)
                 if(courseUnit.test[0])
                     h4 Provas
                     ul
-                    each courseTest in courseUnit.test
-                        li
-                        a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/prova/'+courseTest._id)
-                            span=courseTest.testTitle
-                        | 
-                        a(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id)
-                            span Editar
+                        each courseTest in courseUnit.test
+                            li=courseTest.testTitle 
+                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id) Editar
         
         .course-container-unit-form.addUnitForm
             form(method="post" action="/cursos/"+course._id+"/criarUnidade")
@@ -127,7 +125,7 @@ div(class="course-header category_"+course.courseCategory)
             if(String(courseItem._id) !=  String(course._id))
                 if(courseItem.courseCategory === course.courseCategory)
                     li(class="course-thumb category_"+courseItem.courseCategory)
-                        a(href="cursos/"+courseItem._id)
+                        a(href="/cursos/"+courseItem._id)
                             .course-thumb-mask-shadow
                             .course-thumb-mask
                             img(src="/images/covers/thumb/"+courseItem.courseCover+".jpg")

@@ -7,6 +7,7 @@ var courseRoute = express.Router();
 var bodyParser = require('body-parser');
 
 var CourseModel = require('../models/courseModel');
+var UserModel = require('../models/userModel');
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 var sessionCourses;
@@ -69,7 +70,80 @@ courseRoute.get('/:id', function(req,res){
 
 courseRoute.get('/:id/sala-de-aula/:unitId/video/:videoId', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
+    
+
     CourseModel.findById(req.params.id, function(error, course){
+        UserModel.findById(req.user.id, function(error, user){
+            if(user.courses[0]){
+                user.courses.map(function (userCourse){
+                    if(userCourse.courseId == course._id){
+                        userCourse.courseUnits.map(function (userCourseUnit){
+                            if(userCourseUnit.unitId == req.params.unitId){
+                                var founded = false;
+                                userCourseUnit.videos.map(function (userVideo){
+                                    if(userVideo.videoId == req.params.videoId){
+                                        founded = true;
+                                    }
+                                })
+                                if(!founded){
+                                    userCourseUnit.videos.push({
+                                        videoId: req.params.videoId
+                                    })
+                                    var subdoc = userCourseUnit.videos[0];
+                                    subdoc.isNew; // true
+                                    user.save(function (err){
+                                        console.log(err);
+                                    })
+                                }
+                            } else {
+                                userCourse.courseUnits.push({
+                                    unitId: req.params.unitId,
+                                    videos: [{
+                                        videoId: req.params.videoId
+                                    }]
+                                })
+                                var subdoc = userCourse.courseUnits[0];
+                                subdoc.isNew; // true
+                                user.save(function (err){
+                                    console.log(err);
+                                })
+                            }
+                        })
+                    } else{
+                        user.courses.push({
+                            courseId: course._id,
+                            courseUnits: [{
+                                unitId: req.params.unitId,
+                                videos: [{
+                                    videoId: req.params.videoId
+                                }]
+                            }]
+                        });
+                        var subdoc = user.courses[0];
+                        subdoc.isNew; // true
+                        user.save(function (err) {
+                            console.log(err);
+                        });
+                    }
+                })
+            } else {
+                user.courses.push({
+                    courseId: course._id,
+                    courseUnits: [{
+                        unitId: req.params.unitId,
+                        videos: [{
+                            videoId: req.params.videoId
+                        }]
+                    }]
+                });
+                var subdoc = user.courses[0];
+                subdoc.isNew; // true
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                });
+            }
+        })
+
         var unit = course.courseUnits.id(req.params.unitId);
         var video = unit.videos.id(req.params.videoId);
         if(error) return console.error(error);

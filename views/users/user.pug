@@ -13,3 +13,19 @@ p=user.name
 p=user.email
 p=user.password
 p=user.admin
+
+each course in courses
+    if(user.courses[0])
+        each userCourse in user.courses
+            if(course._id == userCourse.courseId)
+                h2 Curso #{course.courseTitle}
+                - var unitLength = 0
+                each unit in course.courseUnits
+                    - unitLength = unitLength + unit.videos.length
+                - var userUnitLength = 0
+                each userUnit in userCourse.courseUnits
+                    - userUnitLength = userUnitLength + userUnit.videos.length
+                    p=userUnit.videos
+                - var totalVideo = (userUnitLength/unitLength)*100
+                - totalVideo = Math.round(totalVideo)
+                p #{totalVideo} %

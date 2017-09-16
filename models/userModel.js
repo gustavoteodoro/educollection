@@ -6,8 +6,19 @@ var userSchema = new Schema ({
     email: String,
     password: String,
     admin: Boolean,
-    googleId: String,
-    provider: String
+    courses: [{
+        courseId: String,
+        courseUnits: [{
+            unitId: String,
+            videos: [{
+                videoId: String
+            }],
+            test: [{
+                testId: String,
+                testScore: Number
+            }]
+        }]
+    }]
 });
 
 var UserModel = mongoose.model('User', userSchema);

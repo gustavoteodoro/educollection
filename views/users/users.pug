@@ -11,5 +11,6 @@ ul
     each user in users
         li
             a(href="usuarios/"+user._id)=user.name
+            a(href="usuarios/"+user._id+"/excluir") Exluir
 p
     a(href="/usuarios/novo") Novo usuário

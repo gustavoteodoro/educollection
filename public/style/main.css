@@ -176,7 +176,14 @@ select {
         text-decoration: none;
         padding: 10px 20px 10px 40px;
         margin: 0;
+        transition: all .3s ease;
         border-bottom: 1px solid #495266; }
+        .classroom-sidebar-unit-itens li a:hover {
+          color: #545E75;
+          background: #fff; }
+      .classroom-sidebar-unit-itens li.-active a {
+        color: #545E75;
+        background: #fff; }
 
 .course-carousel {
   padding: 0;
@@ -367,6 +374,9 @@ select {
       color: #fff;
       font-weight: 400;
       text-decoration: none; }
+
+.test-container {
+  margin: 20px; }
 
 .test-answer {
   display: inline-block;
