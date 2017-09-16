@@ -1,16 +1,13 @@
 include ../modules/header
 include ../modules/menu
-ul
-    li
-        a(href="/") Home
-    li
-        a(href="/usuarios") Usuários
 
-h2 Usuários
-ul
-    each user in users
-        li
-            a(href="usuarios/"+user._id)=user.name
-            a(href="usuarios/"+user._id+"/excluir") Exluir
-p
-    a(href="/usuarios/novo") Novo usuário
+.centralized-container
+    h2 Usuários
+    ul
+        each user in users
+            li
+                a(href="usuarios/"+user._id)=user.name
+                | 
+                a(href="usuarios/"+user._id+"/excluir") Exluir
+    p
+        a(href="/usuarios/novo") Novo usuário

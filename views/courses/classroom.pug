@@ -45,6 +45,9 @@ include ../modules/menu
                 if(video.videoOrigin == 'yt')
                     iframe.classroom-video(src='https://www.youtube.com/embed/'+video.videoSource+'?rel=0&showinfo=0', frameborder='0', allowfullscreen='')
                     h2.classroom-video-title=video.videoTitle
+                if(video.videoOrigin == 'vm')
+                    iframe.classroom-video(src='https://player.vimeo.com/video/'+video.videoSource, frameborder='0', webkitallowfullscreen='', mozallowfullscreen='', allowfullscreen='')
+                    h2.classroom-video-title=video.videoTitle
         
         if(test)
             .test-container

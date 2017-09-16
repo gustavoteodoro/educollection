@@ -440,6 +440,45 @@ courseRoute.post('/:id/unidade/:unitId/addVideo', function(req,res){
     })
 })
 
+
+// Editar video
+
+courseRoute.get('/:id/unidade/:unitId/editar-video/:videoId', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var video = unit.videos.id(req.params.videoId);
+        if(error) return console.error(error);
+        res.render('courses/editVideo', {
+            course: course,
+            user: req.user,
+            unit: unit,
+            video: video
+        });
+    })
+})
+
+
+
+// Editar video Enviar
+
+courseRoute.post('/:id/unidade/:unitId/editar-video/:videoId', urlEncodedParser, function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var video = unit.videos.id(req.params.videoId);
+        video.set({
+            videoTitle: req.body.videoTitle,
+            videoOrigin: req.body.videoOrigin,
+            videoSource: req.body.videoSource
+        })
+        course.save(function (err) {
+            if (err) return handleError(err)
+            res.redirect('/cursos/'+course._id);
+        });
+    })
+})
+
 // Adicionar arquivo
 courseRoute.get('/:id/unidade/:unitId/addFile', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
@@ -468,6 +507,20 @@ courseRoute.post('/:id/unidade/:unitId/addFile', upload.any(), function(req,res)
             if (err) return handleError(err)
             res.redirect('/cursos/'+course._id);
         });
+    })
+})
+
+courseRoute.get('/:id/unidade/:unitId/exluir-arquivo/:fileId', function(req,res){
+    require('connect-ensure-login').ensureLoggedIn(),
+    CourseModel.findById(req.params.id, function(error, course){
+        var unit = course.courseUnits.id(req.params.unitId);
+        var file = unit.files.id(req.params.fileId);
+        if(error) return console.error(error);
+        file.remove();
+        course.save(function (err){
+            if (err) return handleError(err)
+            res.redirect('/cursos/'+course._id);
+        })
     })
 })
 

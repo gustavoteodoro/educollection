@@ -47,11 +47,13 @@ div(class="course-header category_"+course.courseCategory)
                     ul
                         each courseVideo in courseUnit.videos
                             li=courseVideo.videoTitle
+                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editar-video/'+courseVideo._id) Editar
                 if(courseUnit.files[0])
                     h4 Anexos
                     ul
                         each courseFile in courseUnit.files
                             li=courseFile.fileTitle
+                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/exluir-arquivo/'+courseFile._id) Exluir
                 if(courseUnit.test[0])
                     h4 Provas
                     ul
