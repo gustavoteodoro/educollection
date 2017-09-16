@@ -7,8 +7,6 @@ var CourseModel = require('../models/courseModel');
 
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
-var phantom = require('phantom');
-
 userRoute.get('/',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res){
