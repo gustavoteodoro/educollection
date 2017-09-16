@@ -1,10 +1,12 @@
 var express = require('express');
+var multer  = require('multer');
+var bodyParser = require('body-parser');
+var app = express();
 var session = require('express-session');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var moment = require('moment');
 var courseRoute = express.Router();
-var bodyParser = require('body-parser');
 
 var CourseModel = require('../models/courseModel');
 var UserModel = require('../models/userModel');
@@ -13,6 +15,7 @@ var urlEncodedParser = bodyParser.urlencoded({extended: false});
 var sessionCourses;
 moment().format('L');
 
+var upload = multer({ dest: 'public/uploads/' });
 
 courseRoute.get('/',
     require('connect-ensure-login').ensureLoggedIn(),
@@ -452,12 +455,12 @@ courseRoute.get('/:id/unidade/:unitId/addFile', function(req,res){
 })
 
 // Adicionar arquivo enviar
-courseRoute.post('/:id/unidade/:unitId/addFile', function(req,res){
+courseRoute.post('/:id/unidade/:unitId/addFile', upload.any(), function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){
         course.courseUnits.id(req.params.unitId).files.push({
             fileTitle: req.body.fileTitle,
-            fileOrigin: req.body.fileOrigin
+            fileSource: req.files[0].filename
         });
         var subdoc = course.courseUnits[0];
         subdoc.isNew; // true

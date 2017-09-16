@@ -1,4 +1,5 @@
 var express = require('express');
+var multer  = require('multer');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
@@ -6,6 +7,8 @@ var users = require('./routes/users.js');
 var courses = require('./routes/courses.js');
 mongoose.connect('mongodb://localhost:27017/educollection');
 var UserModel = require('./models/userModel');
+
+var upload = multer({ dest: 'public/uploads/' });
 
 passport.use(new Strategy(
   function(username, password, cb) {

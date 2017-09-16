@@ -27,7 +27,7 @@ include ../modules/menu
                     ul.classroom-sidebar-unit-itens
                         each courseFile in courseUnit.files
                             li
-                                a(href="#")=courseFile.fileTitle
+                                a(href="/uploads/"+courseFile.fileSource target="_blank")=courseFile.fileTitle
                 if(courseUnit.test[0])
                     h5.classroom-sidebar-unit-subtitle Provas
                     ul.classroom-sidebar-unit-itens
@@ -50,7 +50,7 @@ include ../modules/menu
             .test-container
                 h1 Prova: #{test.testTitle}
                 h3 Curso: #{course.courseTitle} - Unidade #{unit.unitTitle}
-                form(method="post" action='/cursos/'+course._id+'/sala-de-aula/'+unit._id+'/test/'+test._id)
+                form(method="post" action='/cursos/'+course._id+'/sala-de-aula/'+unit._id+'/test/'+test._id ref='uploadForm' id='uploadForm' encType="multipart/form-data")
                     if(test.questions[0])
                         - var questionNumber = 0
                         each question in test.questions

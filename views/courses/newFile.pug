@@ -5,7 +5,7 @@ include ../modules/menu
     h2 Curso #{course.courseTitle}
     h3 Adicionar arquivo na unidade #{unit.unitTitle}
 
-    form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addFile")
+    form(method="post" action="/cursos/"+course._id+"/unidade/"+unit._id+"/addFile" enctype="multipart/form-data")
         label(for="fileTitle") Título do arquivo
         input(type="text" name="fileTitle")
         br

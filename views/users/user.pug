@@ -14,7 +14,7 @@ include ../modules/menu
                         if(course._id == userCourse.courseId)
                             .user-course
                                 li(class="course-thumb category_"+course.courseCategory)
-                                    a(href="cursos/"+course._id)
+                                    a(href="/cursos/"+course._id)
                                         .course-thumb-mask-shadow
                                         .course-thumb-mask
                                         img(src="/images/covers/thumb/"+course.courseCover+".jpg")
