@@ -1,21 +1,21 @@
 {
-  "name": "express-4.x-local-example",
+  "name": "educollection",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with username and password.",
+  "description": "Educollection.",
   "keywords": [
     "example",
     "express",
     "passport"
   ],
-  "author": "Jared Hanson",
-  "license": "Unlicense",
+  "author": "Gustavo Teodoro",
+  "license": "MIT License",
   "homepage": "https://github.com/passport/express-4.x-local-example",
   "repository": {
     "type": "git",
-    "url": "git://github.com/passport/express-4.x-local-example.git"
+    "url": "git://github.com/gustavoteodoro/educollection"
   },
   "bugs": {
-    "url": "https://github.com/passport/express-4.x-local-example/issues"
+    "url": "https://github.com/gustavoteodoro/educollection/issues"
   },
   "scripts": {
     "server": "nodemon server.js",
