@@ -131,6 +131,16 @@ select {
   display: block;
   margin-top: 10px; }
 
+span.dynSpan {
+  display: none; }
+  span.dynSpan.-active {
+    display: block; }
+
+#videoSource {
+  display: none; }
+  #videoSource.-active {
+    display: block; }
+
 .classroom-main {
   width: 70%;
   display: block;
@@ -456,7 +466,7 @@ select {
   .login-container label {
     color: #fff; }
   .login-container input {
-    color: #fff; }
+    color: #000; }
 
 .newCourse-form {
   float: left;

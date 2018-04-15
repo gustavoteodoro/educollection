@@ -10,15 +10,20 @@ include ../modules/menu
         input(type="text" name="videoTitle")
         br
         label(for="videoOrigin") Origem do vídeo
-        select(name="videoOrigin")
+        select#videoOrigin(name="videoOrigin")
+            option(disabled selected) Selecione a origem
             option(value="yt") YouTube
             option(value="vm") Vimeo
+            option(value="mp4") Outro / MP4
         br
-        label(for="videoSource") ID do vídeo
+        label(for="videoSource")
+            span.dynSpan#ytvmTitle ID do vídeo
+            span.dynSpan#mp4Title URL do arquivo MP4
         br
-        span Você vai encontrar no Youtube: https://www.youtube.com/watch?v=[idDoVideo]
+        span.dynSpan#ytDescription Você vai encontrar na URL do Youtube: https://www.youtube.com/watch?v=[idDoVideo]
+        span.dynSpan#vmDescription Você vai encontrar na URL do Vimeo: http://vimeo.com/[idDoVideo]
+        span.dynSpan#mp4Description Cole abaixo a URL do vídeo em MP4. Ex: www.meusite.com.br/video.mp4
         br
-        span e no vimeo: http://vimeo.com/[idDoVideo]
-        input(type="text" name="videoSource")
+        input#videoSource(type="text" name="videoSource")
         br
         input(type="submit" value="Adicionar novo vídeo")

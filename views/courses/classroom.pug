@@ -48,6 +48,14 @@ include ../modules/menu
                 if(video.videoOrigin == 'vm')
                     iframe.classroom-video(src='https://player.vimeo.com/video/'+video.videoSource, frameborder='0', webkitallowfullscreen='', mozallowfullscreen='', allowfullscreen='')
                     h2.classroom-video-title=video.videoTitle
+                if(video.videoOrigin == 'mp4')
+                    video.classroom-video(controls)
+                        source(
+                            src=video.videoSource
+                            type="video/mp4"
+                        )
+                    h2.classroom-video-title=video.videoTitle
+                    
         
         if(test)
             .test-container

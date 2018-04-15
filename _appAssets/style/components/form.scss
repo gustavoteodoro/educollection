@@ -37,3 +37,17 @@ select{
     display: block;
     margin-top: 10px;
 }
+
+span.dynSpan{
+    display: none;
+    &.-active{
+        display: block;
+    }
+}
+
+#videoSource{
+    display: none;
+    &.-active{
+        display: block;
+    }
+}
