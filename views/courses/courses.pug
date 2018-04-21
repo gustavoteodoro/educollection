@@ -1,52 +1,53 @@
 include ../modules/header
 include ../modules/menu
 
-h2.course-carousel-title Lançados recentemente
-ul.course-carousel
-    - var limit = 0;
-    each course in courses
-        if(limit < 10)
-            li(class="course-thumb category_"+course.courseCategory)
-                a(href="cursos/"+course._id)
-                    .course-thumb-mask-shadow
-                    .course-thumb-mask
-                    img(src="/images/covers/thumb/"+course.courseCover+".jpg")
-                    h3.course-thumb-title=course.courseTitle
-                        span.course-thumb-author=course.courseAuthor
-            - limit = limit + 1
+main.page-courses
+    h2.course-carousel-title Lançados recentemente
+    ul.course-carousel
+        - var limit = 0;
+        each course in courses
+            if(limit < 6)
+                li(class="course-thumb category_"+course.courseCategory)
+                    a(href="cursos/"+course._id)
+                        .course-thumb-mask-shadow
+                        .course-thumb-mask
+                        img(src="/images/covers/thumb/"+course.courseCover+".jpg")
+                        h3.course-thumb-title=course.courseTitle
+                            span.course-thumb-author=course.courseAuthor
+                - limit = limit + 1
 
-h2.course-carousel-title JavaScript
-ul.course-carousel.course-carousel-1
-    each course in courses
-        if(course.courseCategory === "JavaScript")
-            li(class="course-thumb category_"+course.courseCategory)
-                a(href="cursos/"+course._id)
-                    .course-thumb-mask-shadow
-                    .course-thumb-mask
-                    img(src="/images/covers/thumb/"+course.courseCover+".jpg")
-                    h3.course-thumb-title=course.courseTitle
-                        span.course-thumb-author=course.courseAuthor
+    h2.course-carousel-title JavaScript
+    ul.course-carousel.course-carousel-1
+        each course in courses
+            if(course.courseCategory === "JavaScript")
+                li(class="course-thumb category_"+course.courseCategory)
+                    a(href="cursos/"+course._id)
+                        .course-thumb-mask-shadow
+                        .course-thumb-mask
+                        img(src="/images/covers/thumb/"+course.courseCover+".jpg")
+                        h3.course-thumb-title=course.courseTitle
+                            span.course-thumb-author=course.courseAuthor
 
-h2.course-carousel-title CSS
-ul.course-carousel
-    each course in courses
-        if(course.courseCategory === "CSS")
-            li(class="course-thumb category_"+course.courseCategory)
-                a(href="cursos/"+course._id)
-                    .course-thumb-mask-shadow
-                    .course-thumb-mask
-                    img(src="/images/covers/thumb/"+course.courseCover+".jpg")
-                    h3.course-thumb-title=course.courseTitle
-                        span.course-thumb-author=course.courseAuthor
+    h2.course-carousel-title CSS
+    ul.course-carousel
+        each course in courses
+            if(course.courseCategory === "CSS")
+                li(class="course-thumb category_"+course.courseCategory)
+                    a(href="cursos/"+course._id)
+                        .course-thumb-mask-shadow
+                        .course-thumb-mask
+                        img(src="/images/covers/thumb/"+course.courseCover+".jpg")
+                        h3.course-thumb-title=course.courseTitle
+                            span.course-thumb-author=course.courseAuthor
 
-h2.course-carousel-title HTML
-ul.course-carousel
-    each course in courses
-        if(course.courseCategory === "HTML")
-            li(class="course-thumb category_"+course.courseCategory)
-                a(href="cursos/"+course._id)
-                    .course-thumb-mask-shadow
-                    .course-thumb-mask
-                    img(src="/images/covers/thumb/"+course.courseCover+".jpg")
-                    h3.course-thumb-title=course.courseTitle
-                        span.course-thumb-author=course.courseAuthor
+    h2.course-carousel-title HTML
+    ul.course-carousel
+        each course in courses
+            if(course.courseCategory === "HTML")
+                li(class="course-thumb category_"+course.courseCategory)
+                    a(href="cursos/"+course._id)
+                        .course-thumb-mask-shadow
+                        .course-thumb-mask
+                        img(src="/images/covers/thumb/"+course.courseCover+".jpg")
+                        h3.course-thumb-title=course.courseTitle
+                            span.course-thumb-author=course.courseAuthor

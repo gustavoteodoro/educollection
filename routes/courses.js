@@ -393,7 +393,6 @@ courseRoute.post('/:id', urlEncodedParser, function(req, res){
 })
 
 // Excluir comentário
-
 courseRoute.get('/:id/excluirComentario/:commentId', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){
@@ -409,7 +408,6 @@ courseRoute.get('/:id/excluirComentario/:commentId', function(req,res){
 
 
 // Criar unidade
-
 courseRoute.post('/:id/criarUnidade', urlEncodedParser, function(req, res){
     CourseModel.findById(req.params.id, function(error, course){
         course.courseUnits.push({
@@ -472,7 +470,6 @@ courseRoute.post('/:id/unidade/:unitId/addVideo', function(req,res){
 
 
 // Editar video
-
 courseRoute.get('/:id/unidade/:unitId/editar-video/:videoId', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){
@@ -491,7 +488,6 @@ courseRoute.get('/:id/unidade/:unitId/editar-video/:videoId', function(req,res){
 
 
 // Editar video Enviar
-
 courseRoute.post('/:id/unidade/:unitId/editar-video/:videoId', urlEncodedParser, function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){

@@ -22,7 +22,8 @@ div(class="course-header category_"+course.courseCategory)
             else
                 if(course.courseUnits[0].test[0])
                     a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
-        a(href='/cursos/'+course._id+'/editar') Editar curso
+        a.course-header-button-edit(href='/cursos/'+course._id+'/editar') Editar curso
+        a.course-header-button-delete(href='/cursos/'+course._id+'/excluir') Excluir curso
 
 .course-container
     main.course-container-content

@@ -1,0 +1,44 @@
+.test{
+    &-preview{
+        &-question{
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid $black-coral;
+            margin: 20px 0;
+            h4 {
+                margin: 0 0 20px;
+                font-size: 20px;
+                color: $black-coral;
+            }
+            span {
+                display: block;
+                font-size: 16px;
+                color: red;
+                &.answer-true{
+                    color: green;
+                    font-weight: bold;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+    &-form{
+        margin: 40px 0;
+        &-finish{
+            min-width: 260px;
+            text-align: center;
+            background: $canary;
+            text-decoration: none;
+            color: $black;
+            padding: 18px;
+            margin-top: 25px;
+            float: right;
+            transition: all .3s ease;
+            font-weight: bold;
+            outline: 0;
+            &:hover{
+                background: darken($canary,10);
+            }
+        }
+    }
+}

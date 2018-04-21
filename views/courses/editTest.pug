@@ -7,26 +7,30 @@ include ../modules/menu
 
     if(test.questions[0])
         each question in test.questions
-            h4=question.questionStatement
-            each answer in question.answers
-                span=answer.answerTitle
-                if(answer.answerTrue)
-                    span Verdadeiro
+            .test-preview-question
+                h4=question.questionStatement
+                each answer in question.answers
+                    span(class=answer.answerTrue ? 'answer-true' : '')=answer.answerTitle
 
-    form(method="post" action='/cursos/'+course._id+'/unidade/'+unit._id+'/editarProva/'+test._id)
-        label(for="testTitle") Enunciado da questão:
-        input(type="text" name="testTitle")
-        br
-        label(for="trueOption") Alternativa correta:
-        input(type="text" name="trueOption")
-        br
-        label(for="fakeOption1") Alternativa incorreta 1:
-        input(type="text" name="fakeOption1")
-        br
-        label(for="fakeOption2") Alternativa incorreta 2:
-        input(type="text" name="fakeOption2")
-        br
-        label(for="fakeOption3") Alternativa incorreta 3:
-        input(type="text" name="fakeOption3")
-        br
-        input(type="submit" value="Adicionar questão")
+    .test-form
+        h3 Adicionar questão
+        form(method="post" action='/cursos/'+course._id+'/unidade/'+unit._id+'/editarProva/'+test._id)
+            label(for="testTitle") Enunciado da questão:
+            input(type="text" name="testTitle")
+            br
+            label(for="trueOption") Alternativa correta:
+            input(type="text" name="trueOption")
+            br
+            label(for="fakeOption1") Alternativa incorreta 1:
+            input(type="text" name="fakeOption1")
+            br
+            label(for="fakeOption2") Alternativa incorreta 2:
+            input(type="text" name="fakeOption2")
+            br
+            label(for="fakeOption3") Alternativa incorreta 3:
+            input(type="text" name="fakeOption3")
+            br
+            input(type="submit" value="Adicionar questão")
+            
+            if(test.questions[0])
+                a.test-form-finish(href='/cursos/'+course._id) Finalizar prova

@@ -4,13 +4,10 @@
     width: 230px;
     height: 130px;
     overflow: hidden;
-    margin: 0 5px;
+    margin: 5px;
     transition: all .3s ease;
     &:hover{
         transform: scale(1.05);
-    }
-    &:first-child{
-        margin-left: 20px;
     }
     img{
         position: absolute;
