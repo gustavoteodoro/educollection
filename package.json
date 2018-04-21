@@ -39,7 +39,8 @@
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "phantom": "^4.0.5",
-    "pug": "^2.0.0-rc.3"
+    "pug": "^2.0.0-rc.3",
+    "shuffle-array": "^1.0.1"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",

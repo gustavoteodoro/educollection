@@ -38,12 +38,12 @@ include ../modules/menu
                                                                     - var currentScore = (userTest.testScore/userTest.testMaxScore)*100
                                                                     - scoreCalculate = scoreCalculate + 1
                                                                     if(totalScore != 0)
-                                                                        - totalScore = (totalScore/scoreCalculate) + (totalScore/currentScore)*100
+                                                                        - totalScore = (totalScore + currentScore)/scoreCalculate
                                                                     else
                                                                         - totalScore = currentScore
                                                                         
                                         h4 Acerto nas provas:
-                                        p #{totalScore}%
+                                        p #{(totalScore)}%
                                         - var userUnitLength = 0
                                         each userUnit in userCourse.courseUnits
                                             - userUnitLength = userUnitLength + userUnit.videos.length

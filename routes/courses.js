@@ -6,6 +6,7 @@ var session = require('express-session');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var moment = require('moment');
+var shuffle = require('shuffle-array');
 var courseRoute = express.Router();
 
 var CourseModel = require('../models/courseModel');
@@ -170,6 +171,9 @@ courseRoute.get('/:id/sala-de-aula/:unitId/test/:testId', function(req,res){
     CourseModel.findById(req.params.id, function(error, course){
         var unit = course.courseUnits.id(req.params.unitId);
         var test = unit.test.id(req.params.testId);
+        test.questions.map(question => {
+            question.answers = shuffle(question.answers);
+        });
         if(error) return console.error(error);
         res.render('courses/classroom', {
             course: course,
@@ -192,7 +196,6 @@ courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, fun
                 test.questions[questionNumber].answers.map((answer)=>{
                     if(req.body[key] == answer._id){
                         if(answer.answerTrue){
-                            console.log('acertou');
                             answerCorrect = answerCorrect + 1;
                         }   
                     }
@@ -216,8 +219,35 @@ courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, fun
                                         testFounded = true;
                                         currentScore = userTest.testScore;
                                         currentMaxScore = userTest.testMaxScore;
-                                        if(((currentMaxScore/currentScore)*100) > ((questionNumber/answerCorrect)*100)){
-                                            console.log('maior');
+                                        console.log(currentScore);
+                                        console.log(currentMaxScore);
+                                        if(currentScore > 0) {
+                                            if(currentMaxScore > 0) {
+                                                if(((currentMaxScore/currentScore)*100) > ((questionNumber/answerCorrect)*100)){
+                                                    userCourseUnit.test.id(userTest._id).remove();
+                                                    userCourseUnit.test.push({
+                                                        testId: test._id,
+                                                        testScore: answerCorrect,
+                                                        testMaxScore: questionNumber
+                                                    });
+                                                    user.save(function (err){
+                                                        console.log(err);
+                                                    })
+                                                }
+                                            } else if (answerCorrect > currentScore) {
+                                                userCourseUnit.test.id(userTest._id).remove();
+                                                userCourseUnit.test.push({
+                                                    testId: test._id,
+                                                    testScore: answerCorrect,
+                                                    testMaxScore: questionNumber
+                                                });
+                                                user.save(function (err){
+                                                    console.log(err);
+                                                })
+                                            } else {
+                                                return false;
+                                            }
+                                        } else if(answerCorrect > 0) {
                                             userCourseUnit.test.id(userTest._id).remove();
                                             userCourseUnit.test.push({
                                                 testId: test._id,
@@ -228,7 +258,7 @@ courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, fun
                                                 console.log(err);
                                             })
                                         } else {
-                                            console.log('menor');
+                                            return false;
                                         }
                                     }
                                 })
@@ -566,7 +596,7 @@ courseRoute.get('/:id/unidade/:unitId/prova/:testId', function(req,res){
             course: course,
             user: req.user,
             unit: unit,
-            test: test
+            test: test,
         });
     })
 })

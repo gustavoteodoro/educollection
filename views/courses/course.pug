@@ -52,7 +52,8 @@ div(class="course-header category_"+course.courseCategory)
                     h4 Anexos
                     ul
                         each courseFile in courseUnit.files
-                            li=courseFile.fileTitle
+                            li
+                                a(href='/uploads/'+courseFile.fileSource)=courseFile.fileTitle
                                 a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/exluir-arquivo/'+courseFile._id) Exluir
                 if(courseUnit.test[0])
                     h4 Provas

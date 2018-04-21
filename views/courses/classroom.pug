@@ -61,14 +61,13 @@ include ../modules/menu
             .test-container
                 h1 Prova: #{test.testTitle}
                 h3 Curso: #{course.courseTitle} - Unidade #{unit.unitTitle}
-                form(method="post" action='/cursos/'+course._id+'/sala-de-aula/'+unit._id+'/test/'+test._id ref='uploadForm' id='uploadForm' encType="multipart/form-data")
+                form(method="post" action='/cursos/'+course._id+'/sala-de-aula/'+unit._id+'/test/'+test._id)
                     if(test.questions[0])
                         - var questionNumber = 0
                         each question in test.questions
                             - questionNumber = questionNumber + 1
                             h4 #{questionNumber} - #{question.questionStatement}
                             each answer in question.answers
-                                p=answer
                                 input.test-answer(type="radio" value=answer._id id=answer._id name='question'+questionNumber)
                                 label(for=answer._id)=answer.answerTitle
                                 br
