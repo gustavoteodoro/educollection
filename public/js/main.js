@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const addUnit = document.querySelector('.addUnit');
     const addUnitForm = document.querySelector('.addUnitForm');
+    const callMobileMenu = document.getElementById('callMobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
 
     if(addUnit){
         addUnit.addEventListener('click', (e)=>{
@@ -41,10 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // const multiSlides = document.querySelector('.course-carousel-1');
-
-    // lory(multiSlides, {
-    //     infinite: 4,
-    //     slidesToScroll: 4
-    // });
+    if(callMobileMenu) {
+        callMobileMenu.addEventListener("click", () => {
+            mobileMenu.classList.add('-active');
+        });
+    }
+    
+    if(closeMobileMenu) {
+        closeMobileMenu.addEventListener("click", () => {
+            mobileMenu.classList.remove('-active'); 
+        })
+    }
 });

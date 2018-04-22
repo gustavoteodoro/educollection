@@ -39,6 +39,13 @@
             &:hover{
                 background: darken($canary,10);
             }
+            @include atMobile {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                float: none;
+            }
         }
     }
 }

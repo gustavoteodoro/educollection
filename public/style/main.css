@@ -11,6 +11,10 @@ body {
   margin: 0 auto;
   overflow: hidden;
   position: relative; }
+  @media screen and (max-width: 700px) {
+    .centralized-container {
+      width: calc(100% - 40px);
+      margin: 0 20px; } }
 
 .course-rating input {
   display: none; }
@@ -138,6 +142,9 @@ input, textarea {
       background: #3494ee; }
     input[type="submit"]:active, textarea[type="submit"]:active {
       background: #127bdd; }
+    @media screen and (max-width: 700px) {
+      input[type="submit"], textarea[type="submit"] {
+        max-width: 100%; } }
 
 select {
   display: block;
@@ -355,7 +362,10 @@ span.dynSpan {
         box-sizing: border-box;
         width: 100%;
         padding: 0 20px;
-        text-align: center; } }
+        text-align: center;
+        font-size: 14px; }
+        .course-header-title > h2 {
+          font-size: 18px; } }
   .course-header-description {
     position: absolute;
     bottom: 20px;
@@ -428,6 +438,9 @@ span.dynSpan {
   color: #fff;
   clear: both;
   overflow: hidden; }
+  @media screen and (max-width: 700px) {
+    .main-header {
+      text-align: center; } }
   .main-header .logo {
     font-family: 'Bree Serif', sans-serif;
     margin-left: 20px;
@@ -440,7 +453,8 @@ span.dynSpan {
     @media screen and (max-width: 700px) {
       .main-header .logo {
         float: none;
-        margin: 0; }
+        margin: 0;
+        display: inline-block; }
         .main-header .logo h1 {
           display: block;
           text-align: center;
@@ -454,10 +468,19 @@ span.dynSpan {
     float: right; }
     @media screen and (max-width: 700px) {
       .main-header .right-header {
-        display: none; } }
-  @media screen and (max-width: 700px) {
-    .main-header .main-menu {
-      display: none; } }
+        display: block;
+        position: fixed;
+        background: #545E75;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100%;
+        z-index: 9000;
+        margin: 0;
+        padding-top: 50px;
+        transition: left .2s ease; }
+        .main-header .right-header.-active {
+          left: 0; } }
   .main-header .main-menu ul {
     margin: 0;
     padding: 0; }
@@ -466,6 +489,12 @@ span.dynSpan {
       margin: 0 10px;
       text-transform: uppercase;
       font-size: 14px; }
+      @media screen and (max-width: 700px) {
+        .main-header .main-menu ul li {
+          display: block;
+          text-align: left;
+          margin: 20px;
+          font-size: 18px; } }
       .main-header .main-menu ul li:last-child {
         margin-right: 20px; }
       .main-header .main-menu ul li a {
@@ -480,10 +509,74 @@ span.dynSpan {
     margin-right: 20px;
     font-size: 14px;
     margin-bottom: 10px; }
+    @media screen and (max-width: 700px) {
+      .main-header .welcome {
+        text-align: left;
+        margin: 20px;
+        font-size: 18px; } }
     .main-header .welcome a {
       color: #fff;
       font-weight: 400;
       text-decoration: none; }
+
+.hamburger-icon {
+  display: none; }
+  @media screen and (max-width: 700px) {
+    .hamburger-icon {
+      display: block;
+      width: 20px;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      top: 26px;
+      left: 20px; }
+      .hamburger-icon:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background: #fff;
+        width: 20px;
+        height: 3px;
+        top: -7px; }
+      .hamburger-icon:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: #fff;
+        width: 20px;
+        height: 3px;
+        top: 7px; } }
+
+.close-menu {
+  display: none; }
+  @media screen and (max-width: 700px) {
+    .close-menu {
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 26px;
+      left: 20px; }
+      .close-menu:before {
+        content: '';
+        display: block;
+        position: absolute;
+        background: #fff;
+        width: 20px;
+        height: 3px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg); }
+      .close-menu:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: #fff;
+        width: 20px;
+        height: 3px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg); } }
 
 .test-container {
   padding: 20px;
@@ -591,10 +684,18 @@ span.dynSpan {
 .newCourse-form {
   float: left;
   width: 40%; }
+  @media screen and (max-width: 700px) {
+    .newCourse-form {
+      box-sizing: border-box;
+      width: 100%; } }
 
 .select-cover {
   float: right;
   width: 50%; }
+  @media screen and (max-width: 700px) {
+    .select-cover {
+      box-sizing: border-box;
+      width: 100%; } }
   .select-cover-item {
     display: none; }
     .select-cover-item:checked + .select-cover-label img {
@@ -605,6 +706,10 @@ span.dynSpan {
       width: 150px;
       border: 4px solid #fff;
       transition: border .3s ease; }
+      @media screen and (max-width: 700px) {
+        .select-cover-label img {
+          width: 50%;
+          box-sizing: border-box; } }
   .select-cover-title {
     display: block;
     margin-bottom: 20px; }
@@ -614,6 +719,12 @@ span.dynSpan {
   float: right;
   width: 50%;
   text-align: right; }
+  @media screen and (max-width: 700px) {
+    .newCourse-submit {
+      width: 100%;
+      float: none;
+      margin: 0;
+      text-align: center; } }
 
 .user-courses {
   overflow: hidden;
@@ -621,6 +732,9 @@ span.dynSpan {
 
 .user-course {
   float: left; }
+  @media screen and (max-width: 700px) {
+    .user-course {
+      float: none; } }
   .user-course-content {
     margin: -5px 5px 20px;
     padding-bottom: 20px;
@@ -650,6 +764,9 @@ span.dynSpan {
       transition: all .3s ease; }
       .user-course-content a:hover {
         background: #635ec3; }
+      @media screen and (max-width: 700px) {
+        .user-course-content a {
+          width: 100%; } }
 
 .test-preview-question {
   padding: 20px;
@@ -685,3 +802,10 @@ span.dynSpan {
     outline: 0; }
     .test-form-finish:hover {
       background: #fffc65; }
+    @media screen and (max-width: 700px) {
+      .test-form-finish {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        float: none; } }

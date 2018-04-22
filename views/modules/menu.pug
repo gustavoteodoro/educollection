@@ -1,7 +1,9 @@
 header.main-header
+    .hamburger-icon#callMobileMenu
     a.logo(href="/")
         h1 Educollection
-    .right-header
+    .right-header#mobileMenu
+        .close-menu#closeMobileMenu
         .welcome
             span Olá, 
                 a(href="/usuarios/"+user._id) #{user.name}

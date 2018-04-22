@@ -13,4 +13,9 @@ body{
     margin: 0 auto;
     overflow: hidden;
     position: relative;
+
+    @include atMobile {
+        width: calc(100% - 40px);
+        margin: 0 20px;
+    }
 }
