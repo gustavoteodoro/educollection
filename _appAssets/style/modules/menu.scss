@@ -11,6 +11,18 @@
         text-decoration: none;
         float: left;
         transition: color .3s ease;
+        outline: 0;
+        
+        @include atMobile {
+            float: none;
+            margin: 0;
+            h1 {
+                display: block;
+                text-align: center;
+                margin: 10px 0 ;
+            }
+        }
+        
         &:hover{
             color: $blue-jeans;
         }
@@ -21,8 +33,14 @@
     .right-header{
         margin-top: 10px;
         float: right;
+        @include atMobile {
+            display: none;
+        }
     }
     .main-menu{
+        @include atMobile {
+            display: none;
+        }
         ul{
             margin: 0;
             padding: 0;

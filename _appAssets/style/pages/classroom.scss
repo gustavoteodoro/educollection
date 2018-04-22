@@ -8,6 +8,10 @@
         width: 100%;
         height: calc(100vh - 69.813px);
         position: relative;
+        
+        @include atMobile {
+            height: auto;
+        }    
     }
     &-video{
         position: absolute;
@@ -15,10 +19,20 @@
         left: 0;
         width: 100%;
         height: calc(100% - 70px);
+
+        @include atMobile {
+            position: relative;
+            height: auto;
+        }
     }
     &-video-title{
         position: absolute;
         bottom: 0;
         left: 20px;
+
+        @include atMobile {
+            font-size: 18px;
+            position: relative;
+        }
     }
 }

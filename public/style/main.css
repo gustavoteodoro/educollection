@@ -41,6 +41,10 @@ body {
   overflow: hidden;
   margin: 5px;
   transition: all .3s ease; }
+  @media screen and (max-width: 700px) {
+    .course-thumb {
+      width: calc(100% - 10px);
+      height: 80px; } }
   .course-thumb:hover {
     transform: scale(1.05); }
   .course-thumb img {
@@ -92,6 +96,16 @@ body {
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#66000000',GradientType=1 );
     /* IE6-9 fallback on horizontal gradient */ }
+    @media screen and (max-width: 700px) {
+      .course-thumb-mask-shadow {
+        background: -moz-radial-gradient(center, ellipse cover, transparent -50%, rgba(0, 0, 0, 0.8) 100%);
+        /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, transparent -50%, rgba(0, 0, 0, 0.8) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, transparent -50%, rgba(0, 0, 0, 0.8) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#66000000',GradientType=1 );
+        /* IE6-9 fallback on horizontal gradient */ } }
 
 label {
   font-size: 18px;
@@ -143,6 +157,10 @@ span.dynSpan {
   width: 70%;
   display: block;
   float: right; }
+  @media screen and (max-width: 700px) {
+    .classroom-main {
+      width: 100%;
+      float: none; } }
 
 .classroom-sidebar {
   width: 30%;
@@ -152,6 +170,12 @@ span.dynSpan {
   float: left;
   background: #545E75;
   color: #fff; }
+  @media screen and (max-width: 700px) {
+    .classroom-sidebar {
+      width: 100%;
+      height: auto;
+      float: none;
+      min-height: calc(100vh - 261px); } }
   .classroom-sidebar-title {
     color: #fff;
     font-size: 20px;
@@ -227,6 +251,9 @@ span.dynSpan {
     width: 70%;
     padding: 20px;
     box-sizing: border-box; }
+    @media screen and (max-width: 700px) {
+      .course-container-content {
+        width: 100%; } }
   .course-container-title {
     font-size: 22px;
     margin: 0;
@@ -241,6 +268,11 @@ span.dynSpan {
       margin-top: 7px;
       transition: color .3s ease;
       margin-left: 10px; }
+      @media screen and (max-width: 700px) {
+        .course-container-title-admin {
+          margin-left: 0;
+          font-weight: bold;
+          display: block; } }
       .course-container-title-admin:hover {
         color: #4640ae; }
   .course-container-unit-form {
@@ -259,6 +291,21 @@ span.dynSpan {
       opacity: 1;
       transform: scale(1);
       margin: 30px auto 30px auto; }
+    @media screen and (max-width: 700px) {
+      .course-container-unit-form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform: scale(0.8) translate(-50%, -50%);
+        z-index: 200;
+        background: #fff; }
+        .course-container-unit-form.-active {
+          border: 1px solid #92DCE5;
+          height: 228px;
+          opacity: 1;
+          transform: scale(1) translate(-50%, -50%);
+          margin: 30px auto 30px auto; } }
   .course-container-sidebar {
     display: block;
     float: right;
@@ -268,6 +315,10 @@ span.dynSpan {
     box-sizing: border-box;
     background: #EEE5E9;
     text-align: center; }
+    @media screen and (max-width: 700px) {
+      .course-container-sidebar {
+        width: 100%;
+        height: auto; } }
     .course-container-sidebar .course-thumb {
       width: 100%;
       text-align: left;
@@ -279,6 +330,9 @@ span.dynSpan {
   height: 300px;
   overflow: hidden;
   color: #fff; }
+  @media screen and (max-width: 700px) {
+    .course-header {
+      height: 200px; } }
   .course-header-bg {
     position: absolute;
     z-index: 1;
@@ -294,6 +348,14 @@ span.dynSpan {
     .course-header-title > h2 {
       font-size: 32px;
       margin: 0; }
+    @media screen and (max-width: 700px) {
+      .course-header-title {
+        top: 50px;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 20px;
+        text-align: center; } }
   .course-header-description {
     position: absolute;
     bottom: 20px;
@@ -301,6 +363,9 @@ span.dynSpan {
     z-index: 20; }
     .course-header-description > p {
       margin: 0; }
+    @media screen and (max-width: 700px) {
+      .course-header-description {
+        display: none; } }
   .course-header-info {
     position: absolute;
     top: 20px;
@@ -325,6 +390,13 @@ span.dynSpan {
     bottom: 30px;
     right: 20px;
     z-index: 20; }
+    @media screen and (max-width: 700px) {
+      .course-header-button {
+        right: auto;
+        left: 0;
+        width: 100%;
+        bottom: 20px;
+        text-align: center; } }
     .course-header-button > a {
       font-size: 18px;
       color: #fff;
@@ -333,6 +405,10 @@ span.dynSpan {
       text-decoration: none;
       border-radius: 5px;
       transition: background .3s ease; }
+      @media screen and (max-width: 700px) {
+        .course-header-button > a {
+          padding: 5px;
+          font-size: 16px; } }
       .course-header-button > a:hover {
         background: #3494ee; }
       .course-header-button > a:active {
@@ -341,6 +417,9 @@ span.dynSpan {
       color: #000 !important;
       background: #FFFD98 !important;
       margin: 0 20px; }
+      @media screen and (max-width: 700px) {
+        .course-header-button-edit {
+          margin: 0 10px; } }
     .course-header-button-delete {
       background: #DB2763 !important; }
 
@@ -356,7 +435,16 @@ span.dynSpan {
     font-weight: 400;
     text-decoration: none;
     float: left;
-    transition: color .3s ease; }
+    transition: color .3s ease;
+    outline: 0; }
+    @media screen and (max-width: 700px) {
+      .main-header .logo {
+        float: none;
+        margin: 0; }
+        .main-header .logo h1 {
+          display: block;
+          text-align: center;
+          margin: 10px 0; } }
     .main-header .logo:hover {
       color: #63ADF2; }
     .main-header .logo h1 {
@@ -364,6 +452,12 @@ span.dynSpan {
   .main-header .right-header {
     margin-top: 10px;
     float: right; }
+    @media screen and (max-width: 700px) {
+      .main-header .right-header {
+        display: none; } }
+  @media screen and (max-width: 700px) {
+    .main-header .main-menu {
+      display: none; } }
   .main-header .main-menu ul {
     margin: 0;
     padding: 0; }
@@ -397,6 +491,12 @@ span.dynSpan {
   box-sizing: border-box;
   height: calc(100vh - 70px);
   overflow: auto; }
+  @media screen and (max-width: 700px) {
+    .test-container {
+      height: auto; } }
+  @media screen and (max-width: 700px) {
+    .test-container h1 {
+      font-size: 20px; } }
 
 .test-answer {
   display: inline-block;
@@ -425,16 +525,27 @@ span.dynSpan {
     width: 100%;
     height: calc(100vh - 69.813px);
     position: relative; }
+    @media screen and (max-width: 700px) {
+      .classroom-main-video {
+        height: auto; } }
   .classroom-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: calc(100% - 70px); }
+    @media screen and (max-width: 700px) {
+      .classroom-video {
+        position: relative;
+        height: auto; } }
   .classroom-video-title {
     position: absolute;
     bottom: 0;
     left: 20px; }
+    @media screen and (max-width: 700px) {
+      .classroom-video-title {
+        font-size: 18px;
+        position: relative; } }
 
 .login-bg-video {
   position: fixed;

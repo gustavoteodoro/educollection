@@ -2,43 +2,6 @@ include ../modules/header
 include ../modules/menu
 
 .classroom
-    aside.classroom-sidebar
-        a.classroom-sidebar-title(href='/cursos/'+course._id)
-            h2=course.courseTitle
-                span por #{course.courseAuthor}
-        if(!course.courseUnits[0])
-            p Não há unidades cadastradas.
-        - var unitNumber = 0
-        if(course.courseUnits[0])
-            each courseUnit in course.courseUnits
-                - unitNumber = unitNumber + 1
-                h4.classroom-sidebar-unit-title Unidade #{unitNumber} - #{courseUnit.unitTitle}
-                if(courseUnit.videos[0])
-                    h5.classroom-sidebar-unit-subtitle Vídeos
-                    ul.classroom-sidebar-unit-itens
-                        each courseVideo in courseUnit.videos
-                            - var checkCurrentVideo = false
-                            if(video)
-                                - checkCurrentVideo = (courseVideo._id == video._id)
-                            li(class=checkCurrentVideo ? '-active' : '')
-                                a(href='/cursos/'+course._id+'/sala-de-aula/'+courseUnit._id+'/video/'+courseVideo._id)=courseVideo.videoTitle
-                if(courseUnit.files[0])
-                    h5.classroom-sidebar-unit-subtitle Anexos
-                    ul.classroom-sidebar-unit-itens
-                        each courseFile in courseUnit.files
-                            li
-                                a(href="/uploads/"+courseFile.fileSource target="_blank")=courseFile.fileTitle
-                if(courseUnit.test[0])
-                    h5.classroom-sidebar-unit-subtitle Provas
-                    ul.classroom-sidebar-unit-itens
-                        each courseTest in courseUnit.test
-                            - var checkCurrentTest = false
-                            if(test)
-                                - var checkCurrentTest = (courseTest._id == test._id)
-                            li(class=checkCurrentTest ? '-active' : '')
-                                a(href='/cursos/'+course._id+'/sala-de-aula/'+courseUnit._id+'/test/'+courseTest._id)
-                                    span=courseTest.testTitle
-
     .classroom-main
         if(video)
             .classroom-main-video
@@ -76,3 +39,40 @@ include ../modules/menu
         if(testResult)
             .test-container
                 h1 Resultado da prova #{testResult.testTitle}
+    
+    aside.classroom-sidebar
+        a.classroom-sidebar-title(href='/cursos/'+course._id)
+            h2=course.courseTitle
+                span por #{course.courseAuthor}
+        if(!course.courseUnits[0])
+            p Não há unidades cadastradas.
+        - var unitNumber = 0
+        if(course.courseUnits[0])
+            each courseUnit in course.courseUnits
+                - unitNumber = unitNumber + 1
+                h4.classroom-sidebar-unit-title Unidade #{unitNumber} - #{courseUnit.unitTitle}
+                if(courseUnit.videos[0])
+                    h5.classroom-sidebar-unit-subtitle Vídeos
+                    ul.classroom-sidebar-unit-itens
+                        each courseVideo in courseUnit.videos
+                            - var checkCurrentVideo = false
+                            if(video)
+                                - checkCurrentVideo = (courseVideo._id == video._id)
+                            li(class=checkCurrentVideo ? '-active' : '')
+                                a(href='/cursos/'+course._id+'/sala-de-aula/'+courseUnit._id+'/video/'+courseVideo._id)=courseVideo.videoTitle
+                if(courseUnit.files[0])
+                    h5.classroom-sidebar-unit-subtitle Anexos
+                    ul.classroom-sidebar-unit-itens
+                        each courseFile in courseUnit.files
+                            li
+                                a(href="/uploads/"+courseFile.fileSource target="_blank")=courseFile.fileTitle
+                if(courseUnit.test[0])
+                    h5.classroom-sidebar-unit-subtitle Provas
+                    ul.classroom-sidebar-unit-itens
+                        each courseTest in courseUnit.test
+                            - var checkCurrentTest = false
+                            if(test)
+                                - var checkCurrentTest = (courseTest._id == test._id)
+                            li(class=checkCurrentTest ? '-active' : '')
+                                a(href='/cursos/'+course._id+'/sala-de-aula/'+courseUnit._id+'/test/'+courseTest._id)
+                                    span=courseTest.testTitle

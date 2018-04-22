@@ -9,6 +9,10 @@
         width: 70%;
         padding: 20px;
         box-sizing: border-box;
+
+        @include atMobile {
+            width: 100%;
+        }
     }
     &-title{
         font-size: 22px;
@@ -17,6 +21,7 @@
         border-bottom: 1px solid $black-olive;
         padding-bottom: 10px;
         text-align: left;
+
         &-admin{
             font-size: 12px;
             color: $ube;
@@ -24,6 +29,13 @@
             margin-top: 7px;
             transition: color .3s ease;
             margin-left: 10px;
+            
+            @include atMobile {
+                margin-left: 0;
+                font-weight: bold;
+                display: block;
+            }
+            
             &:hover{
                 color: darken($ube,20);
             }
@@ -46,6 +58,24 @@
             transform: scale(1);
             margin: 30px auto 30px auto;
         }
+
+        @include atMobile {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            transform: scale(.8) translate(-50%, -50%);
+            z-index: 200;
+            background: $white;
+
+            &.-active{
+                border: 1px solid $light-blue;
+                height: 228px;
+                opacity: 1;
+                transform: scale(1) translate(-50%, -50%);
+                margin: 30px auto 30px auto;
+            }
+        }
     }
     &-sidebar{
         display: block;
@@ -56,6 +86,12 @@
         box-sizing: border-box;
         background: $platinum;
         text-align: center;
+        
+        @include atMobile {
+            width: 100%;
+            height: auto;
+        }
+
         .course-thumb{
             width: 100%;
             text-align: left;
