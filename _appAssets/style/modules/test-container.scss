@@ -15,6 +15,18 @@
                 font-size: 20px;
             }
         }
+        .result-total{
+            font-size: 40px;
+            font-weight: bold;
+
+            &.good-result{
+                color: $tuscany;
+            }
+
+            &.bad-result{
+                color: $cherry;
+            }
+        }
     }
     &-answer{
         display: inline-block;

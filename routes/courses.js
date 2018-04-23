@@ -330,7 +330,7 @@ courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, fun
             res.render('courses/classroom', {
                 course: course,
                 unit: unit,
-                test: test,
+                testDone: test,
                 user: req.user,
                 answerCorrect: answerCorrect
             });
