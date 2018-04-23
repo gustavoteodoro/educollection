@@ -52,10 +52,7 @@ courseRoute.post('/novo', urlEncodedParser, function(req, res){
     });
     course.save(function(error, course){
         if(error) return console.error(error);
-        res.render('courses/newCourseCreated', {
-            title: req.body.title,
-            user: req.user
-        });
+        res.redirect('/cursos');
     })
 })
 

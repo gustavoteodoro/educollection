@@ -766,7 +766,35 @@ span.dynSpan {
         background: #635ec3; }
       @media screen and (max-width: 700px) {
         .user-course-content a {
-          width: 100%; } }
+          width: 80%; } }
+
+.users ul {
+  margin: 0;
+  padding: 0; }
+
+.users li {
+  display: block;
+  margin: 20px 0; }
+
+.users a {
+  font-size: 20px;
+  text-decoration: none;
+  outline: 0; }
+  .users a.delete {
+    font-size: 12px;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: #DB2763;
+    margin-left: 5px; }
+
+.users .new-user {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  background: #8783D1; }
 
 .test-preview-question {
   padding: 20px;

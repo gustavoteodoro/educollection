@@ -22,46 +22,52 @@ div(class="course-header category_"+course.courseCategory)
             else
                 if(course.courseUnits[0].test[0])
                     a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
-        a.course-header-button-edit(href='/cursos/'+course._id+'/editar') Editar curso
-        a.course-header-button-delete(href='/cursos/'+course._id+'/excluir') Excluir curso
+        if(user.admin)
+            a.course-header-button-edit(href='/cursos/'+course._id+'/editar') Editar curso
+            a.course-header-button-delete(href='/cursos/'+course._id+'/excluir') Excluir curso
 
 .course-container
     main.course-container-content
         h3.course-container-title Unidades (#{course.courseUnits.length})
-            a.course-container-title-admin.addUnit(href="#") Adicionar nova unidade
+            if(user.admin)
+                a.course-container-title-admin.addUnit(href="#") Adicionar nova unidade
         if(!course.courseUnits[0])
             p Não há unidades cadastradas.
         - var unitNumber = 0
         if(course.courseUnits[0])
             each courseUnit in course.courseUnits
                 - unitNumber = unitNumber + 1
-                h4 Unidade #{unitNumber} - #{courseUnit.unitTitle} 
-                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
-                    | 
-                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
-                    | 
-                    a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
-                    | 
-                    a.course-container-title-admin(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
+                h4 Unidade #{unitNumber} - #{courseUnit.unitTitle}
+                    if(user.admin)
+                        a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addVideo") Adicionar vídeo
+                        | 
+                        a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addFile") Adicionar arquivos
+                        | 
+                        a.course-container-title-admin(href=course._id+"/unidade/"+courseUnit._id+"/addTest") Adicionar prova
+                        | 
+                        a.course-container-title-admin(href=course._id+"/excluirUnidade/"+courseUnit._id) Excluir
                 if(courseUnit.videos[0])
                     h4 Vídeos
                     ul
                         each courseVideo in courseUnit.videos
                             li=courseVideo.videoTitle
-                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editar-video/'+courseVideo._id) Editar
+                                if(user.admin)
+                                    a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editar-video/'+courseVideo._id) Editar
                 if(courseUnit.files[0])
                     h4 Anexos
                     ul
                         each courseFile in courseUnit.files
                             li
                                 a(href='/uploads/'+courseFile.fileSource)=courseFile.fileTitle
-                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/exluir-arquivo/'+courseFile._id) Exluir
+                                if(user.admin)
+                                    a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/exluir-arquivo/'+courseFile._id) Exluir
                 if(courseUnit.test[0])
                     h4 Provas
                     ul
                         each courseTest in courseUnit.test
-                            li=courseTest.testTitle 
-                                a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id) Editar
+                            li=courseTest.testTitle
+                                if(user.admin)
+                                    a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/editarProva/'+courseTest._id) Editar
         
         .course-container-unit-form.addUnitForm
             form(method="post" action="/cursos/"+course._id+"/criarUnidade")
