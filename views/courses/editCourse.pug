@@ -4,7 +4,7 @@ include ../modules/menu
 .centralized-container
     h2.new-course-title Novo curso
 
-    form(method="post" action="/cursos/novo")
+    form(method="post" action='/cursos/editar/'+course._id)
         .newCourse-form
             label(for="title") Título do curso:
             input(type="text" value=course.courseTitle name="title")
@@ -20,7 +20,10 @@ include ../modules/menu
             select(name="category" value=course.courseCategory)
                 each category in categories
                     - var checkCategory = (course.courseCategory == category)
-                    option(checkCategory ? 'selected')=category
+                    if(checkCategory)
+                        option(selected)=category
+                    else
+                        option=category
             br
             label(for="keywords") Palavras-chave (separadas por vírgula):
             - var courseKeywords = '';
@@ -40,4 +43,4 @@ include ../modules/menu
                 label.select-cover-label(for=cover)
                     img(src="/images/covers/thumb/"+cover+".jpg")
         .newCourse-submit
-            input(type="submit" value="Adicionar curso")
+            input(type="submit" value="Atualizar curso")

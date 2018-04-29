@@ -114,8 +114,8 @@
         height: 3px;
         background: $white;
         position: absolute;
-        top: 26px;
-        left: 20px;
+        top: 0;
+        left: 0;
         &:before{
             content: '';
             display: block;
@@ -134,6 +134,19 @@
             height: 3px;
             top: 7px;
         }
+    }
+}
+
+.call-hamburger{
+    display: none;
+    @include atMobile {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        top: 26px;
+        left: 20px;
     }
 }
 

@@ -6,53 +6,52 @@ include ../modules/menu
     p E-mail: #{user.email}
     
     ul.course-carousel
-    h2 Cursos
-    .user-courses
-        each course in courses
-            if(user.courses[0])
-                    each userCourse in user.courses
-                        if(course._id == userCourse.courseId)
-                            .user-course
-                                li(class="course-thumb category_"+course.courseCategory)
-                                    a(href="/cursos/"+course._id)
-                                        .course-thumb-mask-shadow
-                                        .course-thumb-mask
-                                        img(src="/images/covers/thumb/"+course.courseCover+".jpg")
-                                        h3.course-thumb-title=course.courseTitle
-                                            span.course-thumb-author=course.courseAuthor
+    if(user.courses[0])
+        h2 Cursos
+        .user-courses
+            each course in courses
+                each userCourse in user.courses
+                    if(course._id == userCourse.courseId)
+                        .user-course
+                            li(class="course-thumb category_"+course.courseCategory)
+                                a(href="/cursos/"+course._id)
+                                    .course-thumb-mask-shadow
+                                    .course-thumb-mask
+                                    img(src="/images/covers/thumb/"+course.courseCover+".jpg")
+                                    h3.course-thumb-title=course.courseTitle
+                                        span.course-thumb-author=course.courseAuthor
 
-                                .user-course-content
-                                    - var unitLength = 0
-                                    if(course.courseUnits[0])
-                                        - var totalScore = 0;
-                                        - var scoreCalculate = 0;
-                                        each unit in course.courseUnits
-                                            if(unit.videos[0])
-                                                - unitLength = unitLength + unit.videos.length
-                                            if(unit.test[0])
-                                                each test in unit.test
-                                                    each userUnit inuserCourse.courseUnits
-                                                        if(userUnit.test[0])
-                                                            each userTest in userUnit.test
-                                                                if(test._id == userTest.testId)
-                                                                    - var currentScore = (userTest.testScore/userTest.testMaxScore)*100
-                                                                    - scoreCalculate = scoreCalculate + 1
-                                                                    if(totalScore != 0)
-                                                                        - totalScore = (totalScore + currentScore)/scoreCalculate
-                                                                    else
-                                                                        - totalScore = currentScore
-                                                                        
-                                        h4 Acerto nas provas:
-                                        p #{(totalScore)}%
-                                        - var userUnitLength = 0
-                                        each userUnit in userCourse.courseUnits
-                                            - userUnitLength = userUnitLength + userUnit.videos.length
-                                        - var totalVideo = (userUnitLength/unitLength)*100
-                                        - totalVideo = Math.round(totalVideo)
-                                        h4 Progresso do curso:
-                                        p #{totalVideo}%
-                                        if(totalScore > 70 && totalVideo == 100)
-                                            a(href=user._id+"/certificado/"+course._id) Emitir certificado
-
-            else
-                p Esse usuário ainda não possui cursos em progresso.
+                            .user-course-content
+                                - var unitLength = 0
+                                if(course.courseUnits[0])
+                                    - var totalScore = 0;
+                                    - var scoreCalculate = 0;
+                                    each unit in course.courseUnits
+                                        if(unit.videos[0])
+                                            - unitLength = unitLength + unit.videos.length
+                                        if(unit.test[0])
+                                            each test in unit.test
+                                                each userUnit inuserCourse.courseUnits
+                                                    if(userUnit.test[0])
+                                                        each userTest in userUnit.test
+                                                            if(test._id == userTest.testId)
+                                                                - var currentScore = (userTest.testScore/userTest.testMaxScore)*100
+                                                                - scoreCalculate = scoreCalculate + 1
+                                                                if(totalScore != 0)
+                                                                    - totalScore = (totalScore + currentScore)/scoreCalculate
+                                                                else
+                                                                    - totalScore = currentScore
+                                                                    
+                                    h4 Acerto nas provas:
+                                    p #{Math.trunc(totalScore)}%
+                                    - var userUnitLength = 0
+                                    each userUnit in userCourse.courseUnits
+                                        - userUnitLength = userUnitLength + userUnit.videos.length
+                                    - var totalVideo = (userUnitLength/unitLength)*100
+                                    - totalVideo = Math.round(totalVideo)
+                                    h4 Progresso do curso:
+                                    p #{Math.trunc(totalVideo)}%
+                                    if(totalScore > 70 && totalVideo == 100)
+                                        a(href=user._id+"/certificado/"+course._id) Emitir certificado
+    else
+        p Esse usuário ainda não possui cursos em progresso.

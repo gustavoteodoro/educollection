@@ -339,14 +339,31 @@ courseRoute.post('/:id/sala-de-aula/:unitId/test/:testId', urlEncodedParser, fun
 })
 
 
-courseRoute.get('/:id/editar', function(req,res){
+courseRoute.get('/editar/:id', function(req,res){
     require('connect-ensure-login').ensureLoggedIn(),
     CourseModel.findById(req.params.id, function(error, course){
         if(error) return console.error(error);
         res.render('courses/editCourse', {
             course: course,
-            user: req.user
+            user: req.user,
         });
+    })
+})
+
+courseRoute.post('/editar/:id', urlEncodedParser, function(req,res){
+    var keywords = req.body.keywords.split(", ");
+    var updatedCourse = {
+        courseTitle: req.body.title,
+        courseAuthor: req.body.author,
+        courseDescription: req.body.description,
+        courseCategory: req.body.category,
+        courseCover: req.body.covers,
+        courseKeywords: keywords,
+        courseDate: req.body.date
+    };
+    CourseModel.findByIdAndUpdate(req.params.id, { $set: updatedCourse }, function(error, course){
+        if(error) return console.error(error);
+        res.redirect('/cursos/'+course._id)
     })
 })
 

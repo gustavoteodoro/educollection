@@ -331,6 +331,9 @@ span.dynSpan {
       text-align: left;
       margin: 20px 0 0 0; }
 
+.files-link {
+  text-decoration: none; }
+
 .course-header {
   position: relative;
   width: 100%;
@@ -528,8 +531,8 @@ span.dynSpan {
       height: 3px;
       background: #fff;
       position: absolute;
-      top: 26px;
-      left: 20px; }
+      top: 0;
+      left: 0; }
       .hamburger-icon:before {
         content: '';
         display: block;
@@ -546,6 +549,18 @@ span.dynSpan {
         width: 20px;
         height: 3px;
         top: 7px; } }
+
+.call-hamburger {
+  display: none; }
+  @media screen and (max-width: 700px) {
+    .call-hamburger {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: transparent;
+      position: absolute;
+      top: 26px;
+      left: 20px; } }
 
 .close-menu {
   display: none; }

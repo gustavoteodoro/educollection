@@ -56,7 +56,7 @@ userRoute.post('/novo', urlEncodedParser, function(req, res){
                 });
                 user.save(function(error, user){
                     if(error) return console.error(error);
-                    res.render('users/newUserCreated', {name: user.name});
+                    res.redirect('/usuarios');
                 })
             }
         } else {

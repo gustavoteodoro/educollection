@@ -23,7 +23,7 @@ div(class="course-header category_"+course.courseCategory)
                 if(course.courseUnits[0].test[0])
                     a(href='/cursos/'+course._id+'/sala-de-aula/test/'+course.courseUnits[0]._id+'/test/'+course.courseUnits[0].test[0]._id) Iniciar curso
         if(user.admin)
-            a.course-header-button-edit(href='/cursos/'+course._id+'/editar') Editar curso
+            a.course-header-button-edit(href='/cursos/editar/'+course._id) Editar curso
             a.course-header-button-delete(href='/cursos/'+course._id+'/excluir') Excluir curso
 
 .course-container
@@ -58,7 +58,7 @@ div(class="course-header category_"+course.courseCategory)
                     ul
                         each courseFile in courseUnit.files
                             li
-                                a(href='/uploads/'+courseFile.fileSource)=courseFile.fileTitle
+                                a.files-link(href='/uploads/'+courseFile.fileSource)=courseFile.fileTitle
                                 if(user.admin)
                                     a.course-container-title-admin(href='/cursos/'+course._id+'/unidade/'+courseUnit._id+'/exluir-arquivo/'+courseFile._id) Exluir
                 if(courseUnit.test[0])

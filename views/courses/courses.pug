@@ -6,7 +6,7 @@ main.page-courses
     ul.course-carousel
         - var limit = 0;
         each course in courses
-            if(limit < 6)
+            if(limit < 10)
                 li(class="course-thumb category_"+course.courseCategory)
                     a(href="cursos/"+course._id)
                         .course-thumb-mask-shadow

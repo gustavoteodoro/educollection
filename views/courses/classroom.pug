@@ -41,7 +41,7 @@ include ../modules/menu
                 - var testQuestionsTotal = testDone.questions.length
                 h1 Resultado da prova #{testDone.testTitle}
                 - var total = (answerCorrect/testQuestionsTotal)*100
-                p.result-total(class=(total > 70) ? 'good-result' : 'bad-result') #{total}%
+                p.result-total(class=(total > 70) ? 'good-result' : 'bad-result') #{Math.trunc(total)}%
                 p Você acertou #{answerCorrect} de #{testQuestionsTotal} questões
     
     aside.classroom-sidebar
